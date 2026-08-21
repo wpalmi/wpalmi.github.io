@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OsCars — Taller de Latonería y Pintura Automotriz</title>
+    <title>OsCars — Latonería y Pintura Automotriz</title>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -11,14 +11,16 @@
     />
   </head>
   <body>
+    <!-- HEADER / NAVEGACIÓN -->
     <header class="navbar">
       <div class="logo"><span>Os</span>Cars</div>
       <nav class="nav-links" id="navLinks">
         <a href="#hero">Inicio</a>
         <a href="#servicios">Servicios</a>
         <a href="#vehiculos">Especialidades</a>
-        <a href="#galeria">(Galería)</a>
-        <a href="#contacto">Contacto</a>
+        <a href="#antes-despues">Antes/Después</a>
+        <a href="#galeria">Galería</a>
+        <a href="#contacto">Ubicación</a>
       </nav>
       <a
         href="https://wa.me/573001234567?text=Hola%20OsCars,%20quisiera%20cotizar%20un%20trabajo%20de%20latonería%20o%20pintura"
@@ -32,6 +34,7 @@
       </div>
     </header>
 
+    <!-- HERO SECTION -->
     <section id="hero" class="hero">
       <div class="hero-overlay"></div>
       <div class="hero-content">
@@ -48,13 +51,14 @@
             target="_blank"
             class="btn-primary"
           >
-            <i class="fa-brands fa-whatsapp"></i> Cotiza Con Nosotros
+            <i class="fa-brands fa-whatsapp"></i> Cotizar por WhatsApp
           </a>
           <a href="#servicios" class="btn-secondary">Ver Servicios</a>
         </div>
       </div>
     </section>
 
+    <!-- TIPOS DE VEHÍCULOS ATENDIDOS -->
     <section id="vehiculos" class="vehiculos">
       <h2 class="section-title">Vehículos que Atendemos</h2>
       <p class="section-subtitle">
@@ -91,6 +95,7 @@
       </div>
     </section>
 
+    <!-- SERVICIOS -->
     <section id="servicios" class="servicios">
       <h2 class="section-title">Nuestros Servicios</h2>
       <div class="servicios-grid">
@@ -123,26 +128,224 @@
       </div>
     </section>
 
-    <section id="galeria" class="galeria">
-      <h2 class="section-title">Galería de Trabajos</h2>
+    <!-- MÓDULO INTERACTIVO: COMPARADOR ANTES / DESPUÉS -->
+    <section id="antes-despues" class="antes-despues reveal">
+      <h2 class="section-title">Resultados Reales: Antes y Después</h2>
       <p class="section-subtitle">
-        ¿Quieres ver cómo trabajamos? Te enviamos videos y fotos reales de
-        arreglos recientes en Taxis, Particulares y Camiones directamente a tu
-        celular.
+        Arrastra la barra en el centro para ver la transformación de los
+        vehículos en OsCars
       </p>
 
-      <div class="galeria-cta reveal">
-        <a
-          href="https://wa.me/573004363078?text=Hola%20OsCars,%20quisiera%20ver%20fotos%20y%20videos%20de%20sus%20trabajos%20recientes"
-          target="_blank"
-          class="btn-primary"
-        >
-          <i class="fa-brands fa-whatsapp"></i> Consulta Nuestros Trabajos
-        </a>
+      <div class="ba-slider-container">
+        <div class="ba-slider" id="baSlider">
+          <div
+            class="img-before"
+            style="
+              background-image: url(&quot;https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1200&q=80&quot;);
+            "
+          >
+            <span class="ba-label label-before">ANTES (Daño)</span>
+          </div>
+          <div
+            class="img-after"
+            style="
+              background-image: url(&quot;https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80&quot;);
+            "
+          >
+            <span class="ba-label label-after">DESPUÉS (Restaurado)</span>
+          </div>
+          <input
+            type="range"
+            min="0"
+            max="100"
+            value="50"
+            class="slider-handle"
+            id="sliderHandle"
+          />
+          <div class="slider-line" id="sliderLine"></div>
+        </div>
       </div>
     </section>
 
-    <footer id="contacto" class="footer">
+    <!-- SECCIÓN GALERÍA DE TRABAJOS -->
+   <!-- SECCIÓN GALERÍA DE TRABAJOS -->
+    <section id="galeria" class="galeria">
+      <h2 class="section-title">Galería de Trabajos</h2>
+      <p class="section-subtitle">
+        Haz clic en cualquier imagen para verla en tamaño completo
+      </p>
+
+      <div class="galeria-filtros">
+        <button class="filter-btn active" data-filter="todos">Todos</button>
+        <button class="filter-btn" data-filter="taxis">Taxis</button>
+        <button class="filter-btn" data-filter="particulares">
+          Particulares
+        </button>
+        <button class="filter-btn" data-filter="camiones">Camiones</button>
+      </div>
+
+      <!-- Malla de Fotos (con rutas corregidas) -->
+      <div class="galeria-grid">
+        <div
+          class="galeria-item particulares reveal"
+          data-full="img/aveo.jpg"
+          data-title="Renault Logan"
+          data-desc="Pintura general al horno e igualación de tono original."
+        >
+          <img src="img/aveo.jpg" alt="Renault Logan" />
+          <div class="galeria-overlay">
+            <span>
+              Renault Logan — Pintura General
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="galeria-item taxis reveal"
+          data-full="img/kiataxi.jpg"
+          data-title="Hyundai Atos"
+          data-desc="Latonería de bumper delantero y aplicación de pintura amarilla de alta resistencia."
+        >
+          <img src="img/kiataxi.jpg" alt="Hyundai Atos" />
+          <div class="galeria-overlay">
+            <span>
+              Hyundai Atos — Latonería de Bumper
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="galeria-item camiones reveal"
+          data-full="img/npr.jpg"
+          data-title="Camión NPR"
+          data-desc="Cuadre de cabina pesada y pintura general comercial."
+        >
+          <img src="img/npr.jpg" alt="Camión NPR" />
+          <div class="galeria-overlay">
+            <span>
+              Camión NPR — Cuadre de Cabina
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="galeria-item particulares reveal"
+          data-full="img/pintura.jpg"
+          data-title="Chevrolet Aveo"
+          data-desc="Eliminación de rayones laterales y polichado general."
+        >
+          <img src="img/pintura.jpg" alt="Chevrolet Aveo" />
+          <div class="galeria-overlay">
+            <span>
+              Chevrolet Aveo — Corrección de Rayones
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="galeria-item taxis reveal"
+          data-full="img/pintura2.jpg"
+          data-title="Kia Picanto Taxi"
+          data-desc="Sustitución de capó, cuadre de lámina y pintura al horno."
+        >
+          <img src="img/pintura2.jpg" alt="Kia Picanto Taxi" />
+          <div class="galeria-overlay">
+            <span>
+              Kia Picanto — Cambio de Capó y Pintura
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="galeria-item camiones reveal"
+          data-full="img/kiataxi.jpg"
+          data-title="Furgón Comercial"
+          data-desc="Pintura anticorrosiva y alistamiento general de carrocería."
+        >
+          <img src="img/kiataxi.jpg" alt="Furgón" />
+          <div class="galeria-overlay">
+            <span>
+              Furgón — Pintura Comercial
+              <i class="fa-solid fa-magnifying-glass-plus"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VENTANA FLOTANTE (MODAL / LIGHTBOX) -->
+    <div class="modal-lightbox" id="modalLightbox">
+      <span class="modal-close" id="modalClose">&times;</span>
+      <div class="modal-content">
+        <img src="" id="modalImg" alt="Trabajo Realizado" />
+        <div class="modal-info">
+          <h3 id="modalTitle">Título del Trabajo</h3>
+          <p id="modalDesc">Descripción detallada del trabajo realizado.</p>
+          <a href="#" id="modalWappBtn" target="_blank" class="btn-primary">
+            <i class="fa-brands fa-whatsapp"></i> Cotizar un trabajo similar
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- UBICACIÓN, MAPA Y CONTACTO -->
+    <section id="contacto" class="contacto-section">
+      <h2 class="section-title">Encuéntranos Fácilmente</h2>
+      <p class="section-subtitle">
+        Visítanos en nuestro taller o comunícate directamente
+      </p>
+
+      <div class="contacto-container">
+        <div class="contacto-info reveal">
+          <div class="info-card">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+              <h4>Dirección</h4>
+              <p>Calle 13 # 38 - 45, Zona Industrial / 7 de Agosto</p>
+              <p><small>(Bogotá / Colombia)</small></p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <i class="fa-solid fa-phone"></i>
+            <div>
+              <h4>Teléfonos / WhatsApp</h4>
+              <p>+57 300 123 4567</p>
+              <p>+57 311 987 6543</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <i class="fa-solid fa-clock"></i>
+            <div>
+              <h4>Horarios de Atención</h4>
+              <p>Lunes a Viernes: 7:30 AM - 5:30 PM</p>
+              <p>Sábados: 7:30 AM - 2:00 PM</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mapa-container reveal">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.879101037672!2d-74.0935!3d4.6253!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwMzcnMzEuMSJOIDc0wrAwNSczNi42Ilc!5e0!3m2!1ses!2sco!4v1620000000000!5m2!1ses!2sco"
+            width="100%"
+            height="100%"
+            style="border: 0"
+            allowfullscreen=""
+            loading="lazy"
+          >
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
       <div class="footer-content">
         <div class="footer-brand">
           <h2><span>Os</span>Cars</h2>
@@ -151,24 +354,42 @@
             acabados garantizados.
           </p>
         </div>
-        <div class="footer-info">
+
+        <div class="footer-links">
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="#hero">Inicio</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#vehiculos">Especialidades</a></li>
+            <li><a href="#antes-despues">Antes/Después</a></li>
+            <li><a href="#galeria">Galería</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-action">
+          <h4>¿Necesitas una cotización?</h4>
           <p>
-            <i class="fa-solid fa-location-dot"></i> Calle Principal #12-34
-            (Barrio / Sector)
+            Envíanos una foto del golpe o rayón de tu vehículo y te respondemos
+            de inmediato.
           </p>
-          <p><i class="fa-solid fa-phone"></i> +57 300 436 30 78</p>
-          <p>
-            <i class="fa-solid fa-clock"></i> Lunes a Sábado: 7:30 AM - 5:30 PM
-          </p>
+          <a
+            href="https://wa.me/573001234567?text=Hola%20OsCars,%20quisiera%20cotizar%20un%20trabajo"
+            target="_blank"
+            class="btn-whatsapp-footer"
+          >
+            <i class="fa-brands fa-whatsapp"></i> Escribir a WhatsApp
+          </a>
         </div>
       </div>
+
       <div class="footer-bottom">
         <p>&copy; 2026 OsCars Taller. Todos los derechos reservados.</p>
       </div>
     </footer>
 
+    <!-- BOTÓN FLOTANTE WHATSAPP -->
     <a
-      href="https://wa.me/573004363078"
+      href="https://wa.me/573001234567"
       target="_blank"
       class="whatsapp-float"
       title="Hablar por WhatsApp"
