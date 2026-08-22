@@ -3,6 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
+    ></script>
+    <script type="text/javascript">
+      (function () {
+        emailjs.init("HsIH8kppZjCosq9-S");
+      })();
+    </script>
+
     <title>Soluciones Netsys S.A.S. | Tecnología a tu alcance</title>
     <!-- Google Fonts & FontAwesome -->
     <link
@@ -752,7 +763,7 @@
             </div>
             <div class="info-item">
               <i class="fa-solid fa-phone"></i>
-              <span>+57 300 322 4309<br />+57 316 665 5392</span>
+              <span>+57 300 322 4309<br /></span>
             </div>
             <div class="info-item">
               <i class="fa-solid fa-envelope"></i>
@@ -878,18 +889,24 @@
     <script>
       function handleFormSubmit(e) {
         e.preventDefault();
-        const nombre = document.getElementById("nombre").value;
-        const email = document.getElementById("email").value;
-        const servicio = document.getElementById("servicio").value;
 
-        alert(
-          "¡Gracias " +
-            nombre +
-            "! Tu consulta sobre " +
-            servicio +
-            " ha sido enviada exitosamente al buzón gerencia@netsysas.com. Nos pondremos en contacto contigo a la brevedad.",
-        );
-        document.getElementById("consultationForm").reset();
+        const formElement = document.getElementById("consultationForm");
+
+        // Enviar el formulario usando EmailJS
+        emailjs
+          .sendForm("service_7s9fe2g", "template_3godeq6", formElement)
+          .then(
+            function () {
+              alert("¡Gracias! Tu mensaje ha sido enviado exitosamente.");
+              formElement.reset();
+            },
+            function (error) {
+              alert(
+                "Ocurrió un error al enviar el mensaje. Inténtalo de nuevo.",
+              );
+              console.error("Error EmailJS:", error);
+            },
+          );
       }
     </script>
   </body>
