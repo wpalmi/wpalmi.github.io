@@ -15,6 +15,7 @@
     </script>
 
     <title>Soluciones Netsys S.A.S. | Tecnología a tu alcance</title>
+
     <!-- Google Fonts & FontAwesome -->
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -25,491 +26,12 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
 
-    <style>
-      :root {
-        --primary-navy: #0a2540;
-        --secondary-blue: #0056b3;
-        --accent-cyan: #00d2ff;
-        --dark-slate: #1d2a3a;
-        --light-bg: #f4f7fa;
-        --white: #ffffff;
-        --text-main: #333333;
-        --text-muted: #666666;
-        --border-color: #e2e8f0;
-      }
-
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-        scroll-behavior: smooth;
-      }
-
-      body {
-        background-color: var(--light-bg);
-        color: var(--text-main);
-        line-height: 1.6;
-      }
-
-      /* --- Header & Navigation --- */
-      header {
-        background-color: var(--primary-navy);
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      }
-
-      .navbar {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 2rem;
-      }
-
-      .brand-logo {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        color: var(--white);
-        text-decoration: none;
-        font-size: 1.4rem;
-        font-weight: 700;
-        letter-spacing: 0.5px;
-      }
-
-      .brand-logo i {
-        font-size: 2rem;
-        color: var(--accent-cyan);
-      }
-
-      .nav-links {
-        display: flex;
-        list-style: none;
-        gap: 2rem;
-      }
-
-      .nav-links a {
-        color: var(--white);
-        text-decoration: none;
-        font-weight: 500;
-        transition: color 0.3s ease;
-      }
-
-      .nav-links a:hover {
-        color: var(--accent-cyan);
-      }
-
-      .btn-header {
-        background: linear-gradient(
-          135deg,
-          var(--secondary-blue),
-          var(--accent-cyan)
-        );
-        color: var(--white);
-        padding: 0.6rem 1.4rem;
-        border-radius: 25px;
-        text-decoration: none;
-        font-weight: 600;
-        transition:
-          transform 0.2s,
-          box-shadow 0.2s;
-      }
-
-      .btn-header:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(0, 210, 255, 0.4);
-      }
-
-      /* --- Hero Section --- */
-      .hero {
-        background: linear-gradient(
-          135deg,
-          var(--primary-navy) 0%,
-          var(--dark-slate) 100%
-        );
-        color: var(--white);
-        padding: 6rem 2rem 5rem;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .hero-content {
-        max-width: 900px;
-        margin: 0 auto;
-        position: relative;
-        z-index: 2;
-      }
-
-      .hero h1 {
-        font-size: 2.8rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        line-height: 1.2;
-      }
-
-      .hero h1 span {
-        color: var(--accent-cyan);
-      }
-
-      .hero p {
-        font-size: 1.2rem;
-        color: #cbd5e1;
-        margin-bottom: 2rem;
-      }
-
-      .hero-buttons {
-        display: flex;
-        justify-content: center;
-        gap: 1.5rem;
-      }
-
-      .btn-primary {
-        background: var(--accent-cyan);
-        color: var(--primary-navy);
-        padding: 0.8rem 2rem;
-        border-radius: 30px;
-        font-weight: 700;
-        text-decoration: none;
-        transition: all 0.3s;
-      }
-
-      .btn-primary:hover {
-        background: #00b8e6;
-        box-shadow: 0 4px 20px rgba(0, 210, 255, 0.5);
-      }
-
-      .btn-secondary {
-        border: 2px solid var(--white);
-        color: var(--white);
-        padding: 0.8rem 2rem;
-        border-radius: 30px;
-        font-weight: 600;
-        text-decoration: none;
-        transition: all 0.3s;
-      }
-
-      .btn-secondary:hover {
-        background: var(--white);
-        color: var(--primary-navy);
-      }
-
-      /* --- Section Container --- */
-      .section {
-        padding: 5rem 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      .section-title {
-        text-align: center;
-        margin-bottom: 3.5rem;
-      }
-
-      .section-title h2 {
-        font-size: 2.2rem;
-        color: var(--primary-navy);
-        position: relative;
-        display: inline-block;
-        padding-bottom: 10px;
-      }
-
-      .section-title h2::after {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 4px;
-        background: var(--secondary-blue);
-        border-radius: 2px;
-      }
-
-      .section-title p {
-        color: var(--text-muted);
-        margin-top: 8px;
-      }
-
-      /* --- About Section --- */
-      .about-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 2rem;
-      }
-
-      .about-card {
-        background: var(--white);
-        padding: 2.5rem;
-        border-radius: 12px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-        border-top: 4px solid var(--secondary-blue);
-      }
-
-      .about-card i {
-        font-size: 2.5rem;
-        color: var(--secondary-blue);
-        margin-bottom: 1rem;
-      }
-
-      .about-card h3 {
-        color: var(--primary-navy);
-        margin-bottom: 1rem;
-      }
-
-      /* --- Services Grid --- */
-      .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 1.8rem;
-      }
-
-      .service-card {
-        background: var(--white);
-        border-radius: 12px;
-        padding: 2rem;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        transition:
-          transform 0.3s,
-          box-shadow 0.3s;
-        display: flex;
-        flex-direction: column;
-        border: 1px solid var(--border-color);
-      }
-
-      .service-card:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 25px rgba(10, 37, 64, 0.12);
-        border-color: var(--accent-cyan);
-      }
-
-      .service-icon {
-        width: 60px;
-        height: 60px;
-        background: rgba(0, 86, 179, 0.1);
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 1.2rem;
-      }
-
-      .service-icon i {
-        font-size: 1.8rem;
-        color: var(--secondary-blue);
-      }
-
-      .service-card h3 {
-        font-size: 1.25rem;
-        color: var(--primary-navy);
-        margin-bottom: 0.8rem;
-      }
-
-      .service-card p {
-        color: var(--text-muted);
-        font-size: 0.95rem;
-      }
-
-      /* --- Why Choose Us --- */
-      .why-us-bg {
-        background: #ebf3fa;
-      }
-
-      .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .feature-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 1rem;
-        background: var(--white);
-        padding: 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-      }
-
-      .feature-item i {
-        font-size: 1.5rem;
-        color: var(--accent-cyan);
-        background: var(--primary-navy);
-        padding: 10px;
-        border-radius: 50%;
-      }
-
-      .feature-item h4 {
-        color: var(--primary-navy);
-        margin-bottom: 4px;
-      }
-
-      /* --- Contact Section & Form --- */
-      .contact-container {
-        display: grid;
-        grid-template-columns: 1fr 1.5fr;
-        gap: 3rem;
-        background: var(--white);
-        border-radius: 16px;
-        padding: 3rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-      }
-
-      .contact-info {
-        background: var(--primary-navy);
-        color: var(--white);
-        padding: 2.5rem;
-        border-radius: 12px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-
-      .contact-info h3 {
-        font-size: 1.8rem;
-        margin-bottom: 1.5rem;
-        color: var(--accent-cyan);
-      }
-
-      .info-item {
-        display: flex;
-        align-items: center;
-        gap: 1.2rem;
-        margin-bottom: 1.5rem;
-      }
-
-      .info-item i {
-        font-size: 1.4rem;
-        color: var(--accent-cyan);
-        width: 30px;
-      }
-
-      .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 1.2rem;
-      }
-
-      .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-
-      .form-group label {
-        font-weight: 600;
-        color: var(--primary-navy);
-        font-size: 0.9rem;
-      }
-
-      .form-control {
-        padding: 0.8rem 1rem;
-        border: 1px solid var(--border-color);
-        border-radius: 8px;
-        font-size: 1rem;
-        outline: none;
-        transition: border-color 0.3s;
-      }
-
-      .form-control:focus {
-        border-color: var(--secondary-blue);
-      }
-
-      textarea.form-control {
-        resize: vertical;
-        min-height: 120px;
-      }
-
-      .btn-submit {
-        background: var(--primary-navy);
-        color: var(--white);
-        border: none;
-        padding: 1rem 2rem;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.3s;
-      }
-
-      .btn-submit:hover {
-        background: var(--secondary-blue);
-      }
-
-      /* --- Footer --- */
-      footer {
-        background-color: var(--primary-navy);
-        color: #94a3b8;
-        padding: 3rem 2rem 1.5rem;
-        text-align: center;
-        border-top: 1px solid #1e293b;
-      }
-
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-        padding-bottom: 2rem;
-        border-bottom: 1px solid #1e293b;
-      }
-
-      .footer-brand {
-        color: var(--white);
-        font-size: 1.2rem;
-        font-weight: 700;
-      }
-
-      .copyright {
-        margin-top: 1.5rem;
-        font-size: 0.9rem;
-      }
-
-      /* WhatsApp Floating Button */
-      .whatsapp-float {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        background-color: #25d366;
-        color: white;
-        width: 60px;
-        height: 60px;
-        border-radius: 50px;
-        text-align: center;
-        font-size: 30px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-decoration: none;
-        transition: transform 0.3s;
-      }
-
-      .whatsapp-float:hover {
-        transform: scale(1.1);
-      }
-
-      @media (max-width: 900px) {
-        .contact-container {
-          grid-template-columns: 1fr;
-        }
-        .nav-links {
-          display: none;
-        }
-      }
-    </style>
+    <!-- Vincular hoja de estilos CSS separada -->
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <!-- Header & Navigation -->
-    <header>
+    <header id="mainHeader">
       <nav class="navbar">
         <a href="#" class="brand-logo">
           <i class="fa-solid fa-network-wired"></i>
@@ -519,6 +41,7 @@
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#nosotros">Nosotros</a></li>
           <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#clientes">Clientes</a></li>
           <li><a href="#por-que-elegirnos">Por Qué Elegirnos</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
@@ -530,7 +53,7 @@
 
     <!-- Hero Section -->
     <section id="inicio" class="hero">
-      <div class="hero-content">
+      <div class="hero-content reveal">
         <h1>
           Soluciones Tecnológicas Integrales a la
           <span>Medida de tu Empresa</span>
@@ -547,14 +70,32 @@
       </div>
     </section>
 
+    <!-- Contador de Impacto -->
+    <section class="stats-section reveal">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <h3 class="counter" data-target="5">+0</h3>
+          <p>Años de Experiencia</p>
+        </div>
+        <div class="stat-item">
+          <h3 class="counter" data-target="150">+0</h3>
+          <p>Proyectos Ejecutados</p>
+        </div>
+        <div class="stat-item">
+          <h3 class="counter" data-target="100">0%</h3>
+          <p>Clientes Satisfechos</p>
+        </div>
+      </div>
+    </section>
+
     <!-- About Section -->
     <section id="nosotros" class="section">
-      <div class="section-title">
+      <div class="section-title reveal">
         <h2>¿Quiénes Somos?</h2>
         <p>Conoce la visión y el compromiso que nos impulsan</p>
       </div>
       <div class="about-grid">
-        <div class="about-card">
+        <div class="about-card reveal">
           <i class="fa-solid fa-building-user"></i>
           <h3>Empresa Especializada</h3>
           <p>
@@ -563,7 +104,7 @@
             costo-beneficio del mercado con más de 5 años de trayectoria.
           </p>
         </div>
-        <div class="about-card">
+        <div class="about-card reveal">
           <i class="fa-solid fa-bullseye"></i>
           <h3>Nuestra Misión</h3>
           <p>
@@ -572,7 +113,7 @@
             competitividad, productividad y calidad de vida cotidiana.
           </p>
         </div>
-        <div class="about-card">
+        <div class="about-card reveal">
           <i class="fa-solid fa-eye"></i>
           <h3>Nuestra Visión</h3>
           <p>
@@ -586,7 +127,7 @@
 
     <!-- Services Section -->
     <section id="servicios" class="section" style="background: var(--white)">
-      <div class="section-title">
+      <div class="section-title reveal">
         <h2>Portafolio de Servicios</h2>
         <p>
           Soluciones eficientes e innovadoras para potenciar su infraestructura
@@ -594,7 +135,16 @@
         </p>
       </div>
       <div class="services-grid">
-        <div class="service-card">
+        <div
+          class="service-card reveal"
+          onclick="
+            openServiceModal(
+              'main/fortinet.jpg',
+              'Seguridad Informática Fortinet',
+              'Protección avanzada de redes, accesos y datos con tecnología Next-Gen Fortinet para mitigar amenazas y vulnerabilidades.',
+            )
+          "
+        >
           <div class="service-icon">
             <i class="fa-solid fa-shield-halved"></i>
           </div>
@@ -604,7 +154,17 @@
             Next-Gen Fortinet para mitigar amenazas y vulnerabilidades.
           </p>
         </div>
-        <div class="service-card">
+
+        <div
+          class="service-card reveal"
+          onclick="
+            openServiceModal(
+              'main/hwsw.jpg',
+              'Hardware y Software',
+              'Venta, instalación, actualización y mantenimiento preventivo y correctivo de equipos informáticos y licencias empresariales.',
+            )
+          "
+        >
           <div class="service-icon">
             <i class="fa-solid fa-laptop-code"></i>
           </div>
@@ -614,7 +174,17 @@
             correctivo de equipos informáticos y licencias empresariales.
           </p>
         </div>
-        <div class="service-card">
+
+        <div
+          class="service-card reveal"
+          onclick="
+            openServiceModal(
+              'main/cloud.jpg',
+              'Servicios Cloud / Nube',
+              'Implementación, gestión y migración a soluciones en la nube con esquemas de respaldo seguro y alta disponibilidad.',
+            )
+          "
+        >
           <div class="service-icon"><i class="fa-solid fa-cloud"></i></div>
           <h3>Servicios Cloud / Nube</h3>
           <p>
@@ -622,7 +192,17 @@
             esquemas de respaldo seguro y alta disponibilidad.
           </p>
         </div>
-        <div class="service-card">
+
+        <div
+          class="service-card reveal"
+          onclick="
+            openServiceModal(
+              'main/redes.jpg',
+              'Redes y Telecomunicaciones',
+              'Diseño, configuración y administración de redes estructurales cableadas e inalámbricas corporativas.',
+            )
+          "
+        >
           <div class="service-icon">
             <i class="fa-solid fa-network-wired"></i>
           </div>
@@ -632,7 +212,17 @@
             cableadas e inalámbricas corporativas.
           </p>
         </div>
-        <div class="service-card">
+
+        <div
+          class="service-card reveal"
+          onclick="
+            openServiceModal(
+              'main/cctv.jpg',
+              'CCTV y Alarmas',
+              'Instalación y monitoreo de sistemas inteligentes de videovigilancia, seguridad electrónica y control de accesos.',
+            )
+          "
+        >
           <div class="service-icon"><i class="fa-solid fa-video"></i></div>
           <h3>CCTV y Alarmas</h3>
           <p>
@@ -640,7 +230,17 @@
             seguridad electrónica y control de accesos.
           </p>
         </div>
-        <div class="service-card">
+
+        <div
+          class="service-card reveal"
+          onclick="
+            openServiceModal(
+              'main/sonido.jpg',
+              'Sonido Ambiental',
+              'Implementación de sistemas de audio y sonorización profesional para oficinas, áreas corporativas y locales comerciales.',
+            )
+          "
+        >
           <div class="service-icon">
             <i class="fa-solid fa-volume-high"></i>
           </div>
@@ -650,7 +250,17 @@
             oficinas, áreas corporativas y locales comerciales.
           </p>
         </div>
-        <div class="service-card">
+
+        <div
+          class="service-card reveal"
+          onclick="
+            openServiceModal(
+              'main/auditoria.jpg',
+              'Auditoría de Sistemas',
+              'Diagnóstico integral y análisis exhaustivo de infraestructura tecnológica, rendimiento y postura de ciberseguridad.',
+            )
+          "
+        >
           <div class="service-icon">
             <i class="fa-solid fa-magnifying-glass-chart"></i>
           </div>
@@ -660,7 +270,17 @@
             tecnológica, rendimiento y postura de ciberseguridad.
           </p>
         </div>
-        <div class="service-card">
+
+        <div
+          class="service-card reveal"
+          onclick="
+            openServiceModal(
+              'main/servidores.jpg',
+              'Servidores y Equipos',
+              'Ventas, configuración, virtualización y soporte técnico de servidores de alto rendimiento, partes y accesorios.',
+            )
+          "
+        >
           <div class="service-icon"><i class="fa-solid fa-server"></i></div>
           <h3>Servidores y Equipos</h3>
           <p>
@@ -668,7 +288,17 @@
             servidores de alto rendimiento, partes y accesorios.
           </p>
         </div>
-        <div class="service-card">
+
+        <div
+          class="service-card reveal"
+          onclick="
+            openServiceModal(
+              'main/telefonia.jpg',
+              'Telefonía IP – Cloud',
+              'Implementación de centrales telefónicas IP en la nube para optimizar las comunicaciones internas y externas de la empresa.',
+            )
+          "
+        >
           <div class="service-icon"><i class="fa-solid fa-headset"></i></div>
           <h3>Telefonía IP – Cloud</h3>
           <p>
@@ -679,9 +309,79 @@
       </div>
     </section>
 
+    <!-- Section: Clientes & Testimonios -->
+    <section id="clientes" class="clients-section reveal">
+      <div class="section-title">
+        <h2>Empresas que Confían en Nosotros</h2>
+        <p>Respaldo, experiencia y opiniones que respaldan nuestro trabajo</p>
+      </div>
+
+      <!-- Carrusel Infinito de Logos -->
+<div class="slider-container">
+  <div class="slider-track">
+    <div class="slide-logo"><img src="main/clientes/sierra-tecnologia.png" alt="Sierra Tecnología" /></div>
+    <div class="slide-logo"><img src="main/clientes/mulata.png" alt="Mulata" class="logo-dark-bg" /></div>
+    <div class="slide-logo"><img src="main/clientes/coralina-island.png" alt="Coralina Island" /></div>
+    <div class="slide-logo"><img src="main/clientes/isla-del-encanto.png" alt="Hotel Isla del Encanto" /></div>
+
+    <!-- Duplicado exacto para el loop continuo sin saltos -->
+    <div class="slide-logo"><img src="main/clientes/sierra-tecnologia.png" alt="Sierra Tecnología" /></div>
+    <div class="slide-logo"><img src="main/clientes/mulata.png" alt="Mulata" class="logo-dark-bg" /></div>
+    <div class="slide-logo"><img src="main/clientes/coralina-island.png" alt="Coralina Island" /></div>
+    <div class="slide-logo"><img src="main/clientes/isla-del-encanto.png" alt="Hotel Isla del Encanto" /></div>
+  </div>
+</div>
+
+      <!-- Tarjetas de Testimonios -->
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div>
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "El equipo de Netsys reestructuró toda nuestra red corporativa. 
+              La estabilidad de nuestro sistema mejoró significativamente."
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">CM</div>
+            <div class="author-info">
+              <h4>Carlos Mendoza</h4>
+              <span>Director de TI</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div>
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i
+              ><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-text">
+              "Respuesta inmediata ante cualquier eventualidad con nuestros
+              servidores. Su soporte técnico preventivo nos ha evitado
+              interrupciones en la operación."
+            </p>
+          </div>
+          <div class="testimonial-author">
+            <div class="author-avatar">AR</div>
+            <div class="author-info">
+              <h4>Andrea Ramírez</h4>
+              <span>Gerente de Operaciones</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Why Choose Us -->
     <section id="por-que-elegirnos" class="section why-us-bg">
-      <div class="section-title">
+      <div class="section-title reveal">
         <h2>¿Por Qué Elegirnos?</h2>
         <p>
           Razones para confiar en Soluciones Netsys S.A.S. como su aliado
@@ -689,7 +389,7 @@
         </p>
       </div>
       <div class="features-grid">
-        <div class="feature-item">
+        <div class="feature-item reveal">
           <i class="fa-solid fa-bolt"></i>
           <div>
             <h4>Atención Rápida</h4>
@@ -698,28 +398,28 @@
             </p>
           </div>
         </div>
-        <div class="feature-item">
+        <div class="feature-item reveal">
           <i class="fa-solid fa-award"></i>
           <div>
             <h4>Experiencia Comprobada</h4>
             <p>Años entregando proyectos exitosos en diversos sectores.</p>
           </div>
         </div>
-        <div class="feature-item">
+        <div class="feature-item reveal">
           <i class="fa-solid fa-scale-balanced"></i>
           <div>
             <h4>Costo - Beneficio</h4>
             <p>Precios competitivos adaptados a la medida de su presupuesto.</p>
           </div>
         </div>
-        <div class="feature-item">
+        <div class="feature-item reveal">
           <i class="fa-solid fa-user-shield"></i>
           <div>
             <h4>Seguridad Robusta</h4>
             <p>Especialistas en la implementación de estándares Fortinet.</p>
           </div>
         </div>
-        <div class="feature-item">
+        <div class="feature-item reveal">
           <i class="fa-solid fa-headset"></i>
           <div>
             <h4>Soporte Especializado</h4>
@@ -729,7 +429,7 @@
             </p>
           </div>
         </div>
-        <div class="feature-item">
+        <div class="feature-item reveal">
           <i class="fa-solid fa-microchip"></i>
           <div>
             <h4>Tecnología de Punta</h4>
@@ -741,11 +441,11 @@
 
     <!-- Contact Section -->
     <section id="contacto" class="section">
-      <div class="section-title">
+      <div class="section-title reveal">
         <h2>Contáctanos</h2>
         <p>Envíanos tu consulta y te responderemos a la brevedad</p>
       </div>
-      <div class="contact-container">
+      <div class="contact-container reveal">
         <div class="contact-info">
           <div>
             <h3>Información de Contacto</h3>
@@ -785,7 +485,7 @@
           </div>
         </div>
 
-        <!-- Interactive Form with EmailJS / Action simulation -->
+        <!-- Interactive Form with EmailJS -->
         <form
           class="contact-form"
           id="consultationForm"
@@ -850,6 +550,9 @@
                 Auditoría de Sistemas
               </option>
               <option value="Servidores">Servidores y Suministros</option>
+              <option value="Creación de Páginas Web">
+                Creación de Páginas Web
+              </option>
               <option value="Otro">Otro / Consulta General</option>
             </select>
           </div>
@@ -891,28 +594,23 @@
       </p>
     </footer>
 
-    <script>
-      function handleFormSubmit(e) {
-        e.preventDefault();
+    <!-- Modal para Imágenes de Servicios -->
+    <div
+      id="serviceModal"
+      class="modal-overlay"
+      onclick="closeServiceModal(event)"
+    >
+      <div class="modal-content">
+        <span class="modal-close" onclick="closeServiceModalForce()"
+          >&times;</span
+        >
+        <img id="modalImg" src="" alt="Servicio Netsys" class="modal-img" />
+        <h3 id="modalTitle" class="modal-title"></h3>
+        <p id="modalDescription" class="modal-desc"></p>
+      </div>
+    </div>
 
-        const formElement = document.getElementById("consultationForm");
-
-        // Enviar el formulario usando EmailJS
-        emailjs
-          .sendForm("service_7s9fe2g", "template_3godeq6", formElement)
-          .then(
-            function () {
-              alert("¡Gracias! Tu mensaje ha sido enviado exitosamente.");
-              formElement.reset();
-            },
-            function (error) {
-              alert(
-                "Ocurrió un error al enviar el mensaje. Inténtalo de nuevo.",
-              );
-              console.error("Error EmailJS:", error);
-            },
-          );
-      }
-    </script>
+    <!-- Cargar archivo de scripts separado -->
+    <script src="script.js"></script>
   </body>
 </html>
