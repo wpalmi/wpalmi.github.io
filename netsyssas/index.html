@@ -4,6 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <meta
+      name="description"
+      content="Soluciones Netsys S.A.S. - Infraestructura IT, ciberseguridad Fortinet, soporte técnico, redes y servicios Cloud en Cartagena y Colombia."
+    />
+    <meta
+      name="keywords"
+      content="Netsys, Fortinet Cartagena, Soporte técnico empresas, Redes, Ciberseguridad Colombia"
+    />
+    <!-- Metadatos para redes sociales (Open Graph) -->
+    <meta
+      property="og:title"
+      content="Soluciones Netsys S.A.S. | Tecnología a tu alcance"
+    />
+    <meta
+      property="og:description"
+      content="Infraestructura, ciberseguridad Fortinet y soporte IT especializado para tu empresa."
+    />
+    <meta
+      property="og:image"
+      content="https://www.netsysas.com/main/hero-bg.jpg"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Cargar primero el SDK de EmailJS -->
     <script
       type="text/javascript"
       src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
@@ -30,14 +60,32 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- Preloader Tecnológico -->
+    <div id="preloader">
+      <div class="spinner-container">
+        <img
+          src="main/LOGO-NETSYS.png"
+          alt="Netsys Logo"
+          class="spinner-logo-img"
+        />
+        <div class="spinner-line"></div>
+      </div>
+    </div>
+
     <!-- Header & Navigation -->
     <header id="mainHeader">
       <nav class="navbar">
         <a href="#" class="brand-logo">
-          <i class="fa-solid fa-network-wired"></i>
+          <img src="main/LOGO-NETSYS.png" alt="Netsys Logo" class="logo-img" />
           NETSYS S.A.S.
         </a>
-        <ul class="nav-links">
+
+        <!-- Botón Hamburguesa -->
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <ul class="nav-links" id="navLinks">
           <li><a href="#inicio">Inicio</a></li>
           <li><a href="#nosotros">Nosotros</a></li>
           <li><a href="#servicios">Servicios</a></li>
@@ -45,6 +93,7 @@
           <li><a href="#por-que-elegirnos">Por Qué Elegirnos</a></li>
           <li><a href="#contacto">Contacto</a></li>
         </ul>
+
         <a href="main/catalogo.pdf" target="_blank" class="btn-header"
           >Catálogo</a
         >
@@ -134,9 +183,23 @@
           IT
         </p>
       </div>
+
+      <!-- Botones de Filtro de Servicios -->
+      <div class="services-filter reveal">
+        <button class="filter-btn active" data-filter="all">Todos</button>
+        <button class="filter-btn" data-filter="infra">
+          Infraestructura & Hardware
+        </button>
+        <button class="filter-btn" data-filter="seguridad">
+          Seguridad & Redes
+        </button>
+        <button class="filter-btn" data-filter="cloud">Cloud & Telecom</button>
+      </div>
+
       <div class="services-grid">
         <div
           class="service-card reveal"
+          data-category="seguridad"
           onclick="
             openServiceModal(
               'main/fortinet.jpg',
@@ -153,10 +216,14 @@
             Protección avanzada de redes, accesos y datos con tecnología
             Next-Gen Fortinet para mitigar amenazas y vulnerabilidades.
           </p>
+          <span class="card-link"
+            >Ver detalles <i class="fa-solid fa-arrow-right"></i
+          ></span>
         </div>
 
         <div
           class="service-card reveal"
+          data-category="infra"
           onclick="
             openServiceModal(
               'main/hwsw.jpg',
@@ -173,10 +240,14 @@
             Venta, instalación, actualización y mantenimiento preventivo y
             correctivo de equipos informáticos y licencias empresariales.
           </p>
+          <span class="card-link"
+            >Ver detalles <i class="fa-solid fa-arrow-right"></i
+          ></span>
         </div>
 
         <div
           class="service-card reveal"
+          data-category="cloud"
           onclick="
             openServiceModal(
               'main/cloud.jpg',
@@ -191,10 +262,14 @@
             Implementación, gestión y migración a soluciones en la nube con
             esquemas de respaldo seguro y alta disponibilidad.
           </p>
+          <span class="card-link"
+            >Ver detalles <i class="fa-solid fa-arrow-right"></i
+          ></span>
         </div>
 
         <div
           class="service-card reveal"
+          data-category="seguridad"
           onclick="
             openServiceModal(
               'main/redes.jpg',
@@ -211,10 +286,14 @@
             Diseño, configuración y administración de redes estructurales
             cableadas e inalámbricas corporativas.
           </p>
+          <span class="card-link"
+            >Ver detalles <i class="fa-solid fa-arrow-right"></i
+          ></span>
         </div>
 
         <div
           class="service-card reveal"
+          data-category="seguridad"
           onclick="
             openServiceModal(
               'main/cctv.jpg',
@@ -229,10 +308,14 @@
             Instalación y monitoreo de sistemas inteligentes de videovigilancia,
             seguridad electrónica y control de accesos.
           </p>
+          <span class="card-link"
+            >Ver detalles <i class="fa-solid fa-arrow-right"></i
+          ></span>
         </div>
 
         <div
           class="service-card reveal"
+          data-category="infra"
           onclick="
             openServiceModal(
               'main/sonido.jpg',
@@ -249,10 +332,14 @@
             Implementación de sistemas de audio y sonorización profesional para
             oficinas, áreas corporativas y locales comerciales.
           </p>
+          <span class="card-link"
+            >Ver detalles <i class="fa-solid fa-arrow-right"></i
+          ></span>
         </div>
 
         <div
           class="service-card reveal"
+          data-category="seguridad"
           onclick="
             openServiceModal(
               'main/auditoria.jpg',
@@ -269,10 +356,14 @@
             Diagnóstico integral y análisis exhaustivo de infraestructura
             tecnológica, rendimiento y postura de ciberseguridad.
           </p>
+          <span class="card-link"
+            >Ver detalles <i class="fa-solid fa-arrow-right"></i
+          ></span>
         </div>
 
         <div
           class="service-card reveal"
+          data-category="infra"
           onclick="
             openServiceModal(
               'main/servidores.jpg',
@@ -287,10 +378,14 @@
             Ventas, configuración, virtualización y soporte técnico de
             servidores de alto rendimiento, partes y accesorios.
           </p>
+          <span class="card-link"
+            >Ver detalles <i class="fa-solid fa-arrow-right"></i
+          ></span>
         </div>
 
         <div
           class="service-card reveal"
+          data-category="cloud"
           onclick="
             openServiceModal(
               'main/telefonia.jpg',
@@ -305,6 +400,9 @@
             Implementación de centrales telefónicas IP en la nube para optimizar
             las comunicaciones internas y externas de la empresa.
           </p>
+          <span class="card-link"
+            >Ver detalles <i class="fa-solid fa-arrow-right"></i
+          ></span>
         </div>
       </div>
     </section>
@@ -317,20 +415,62 @@
       </div>
 
       <!-- Carrusel Infinito de Logos -->
-<div class="slider-container">
-  <div class="slider-track">
-    <div class="slide-logo"><img src="main/clientes/sierra-tecnologia.png" alt="Sierra Tecnología" /></div>
-    <div class="slide-logo"><img src="main/clientes/mulata.png" alt="Mulata" class="logo-dark-bg" /></div>
-    <div class="slide-logo"><img src="main/clientes/coralina-island.png" alt="Coralina Island" /></div>
-    <div class="slide-logo"><img src="main/clientes/isla-del-encanto.png" alt="Hotel Isla del Encanto" /></div>
+      <div class="slider-container">
+        <div class="slider-track">
+          <div class="slide-logo">
+            <img
+              src="main/clientes/sierra-tecnologia.png"
+              alt="Sierra Tecnología"
+            />
+          </div>
+          <div class="slide-logo">
+            <img
+              src="main/clientes/mulata.png"
+              alt="Mulata"
+              class="logo-dark-bg"
+            />
+          </div>
+          <div class="slide-logo">
+            <img
+              src="main/clientes/coralina-island.png"
+              alt="Coralina Island"
+            />
+          </div>
+          <div class="slide-logo">
+            <img
+              src="main/clientes/isla-del-encanto.png"
+              alt="Hotel Isla del Encanto"
+            />
+          </div>
 
-    <!-- Duplicado exacto para el loop continuo sin saltos -->
-    <div class="slide-logo"><img src="main/clientes/sierra-tecnologia.png" alt="Sierra Tecnología" /></div>
-    <div class="slide-logo"><img src="main/clientes/mulata.png" alt="Mulata" class="logo-dark-bg" /></div>
-    <div class="slide-logo"><img src="main/clientes/coralina-island.png" alt="Coralina Island" /></div>
-    <div class="slide-logo"><img src="main/clientes/isla-del-encanto.png" alt="Hotel Isla del Encanto" /></div>
-  </div>
-</div>
+          <!-- Duplicado exacto para el loop continuo sin saltos -->
+          <div class="slide-logo">
+            <img
+              src="main/clientes/sierra-tecnologia.png"
+              alt="Sierra Tecnología"
+            />
+          </div>
+          <div class="slide-logo">
+            <img
+              src="main/clientes/mulata.png"
+              alt="Mulata"
+              class="logo-dark-bg"
+            />
+          </div>
+          <div class="slide-logo">
+            <img
+              src="main/clientes/coralina-island.png"
+              alt="Coralina Island"
+            />
+          </div>
+          <div class="slide-logo">
+            <img
+              src="main/clientes/isla-del-encanto.png"
+              alt="Hotel Isla del Encanto"
+            />
+          </div>
+        </div>
+      </div>
 
       <!-- Tarjetas de Testimonios -->
       <div class="testimonials-grid">
@@ -342,8 +482,8 @@
               ><i class="fa-solid fa-star"></i>
             </div>
             <p class="testimonial-text">
-              "El equipo de Netsys reestructuró toda nuestra red corporativa. 
-              La estabilidad de nuestro sistema mejoró significativamente."
+              "El equipo de Netsys reestructuró toda nuestra red corporativa. La
+              estabilidad de nuestro sistema mejoró significativamente."
             </p>
           </div>
           <div class="testimonial-author">
@@ -434,6 +574,65 @@
           <div>
             <h4>Tecnología de Punta</h4>
             <p>Uso de herramientas y hardware de última generación.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Preguntas Frecuentes (FAQ) -->
+    <section class="section faq-section">
+      <div class="section-title reveal">
+        <h2>Preguntas Frecuentes</h2>
+        <p>
+          Aclaramos tus dudas principales sobre nuestros servicios y
+          metodologías de trabajo
+        </p>
+      </div>
+      <div class="faq-container reveal">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span
+              >¿Cuál es el tiempo de respuesta ante una emergencia
+              técnica?</span
+            >
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Para clientes con contrato de soporte activo, ofrecemos tiempos de
+              respuesta prioritarios de menos de 2 horas para eventos críticos
+              de infraestructura o red.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span
+              >¿Brindan atención y soporte a nivel nacional en Colombia?</span
+            >
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Sí. Brindamos soporte remoto a nivel nacional e
+              implementación/atención presencial estratégica en la región Caribe
+              y principales ciudades del país.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>¿Ofrecen soluciones de ciberseguridad para PYMES?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Absolutamente. Diseñamos esquemas de seguridad Fortinet y
+              firewalls gestionados a la medida de presupuestos de pequeñas y
+              medianas empresas.
+            </p>
           </div>
         </div>
       </div>
@@ -600,7 +799,7 @@
       class="modal-overlay"
       onclick="closeServiceModal(event)"
     >
-      <div class="modal-content">
+      <div class="modal-content" onclick="event.stopPropagation()">
         <span class="modal-close" onclick="closeServiceModalForce()"
           >&times;</span
         >
