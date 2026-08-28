@@ -4,63 +4,57 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta
-      name="description"
-      content="Soluciones Netsys S.A.S. - Infraestructura IT, ciberseguridad Fortinet, soporte técnico, redes y servicios Cloud en Cartagena y Colombia."
-    />
-    <title>Soluciones Netsys S.A.S. | Tecnología a tu alcance</title>
+    <meta name="description" content="Soluciones Netsys S.A.S. - Infraestructura IT, ciberseguridad Fortinet, soporte técnico, redes y servicios Cloud en Cartagena y Colombia.">
+    <meta name="keywords" content="Netsys, Fortinet Cartagena, Soporte técnico empresas, Redes, Ciberseguridad Colombia">
+    
+    <!-- Metadatos para redes sociales (Open Graph) -->
+    <meta property="og:title" content="Soluciones Netsys S.A.S. | Tecnología a tu alcance">
+    <meta property="og:description" content="Infraestructura, ciberseguridad Fortinet y soporte IT especializado para tu empresa.">
+    <meta property="og:image" content="https://www.netsysas.com/main/hero-bg.jpg">
 
-    <!-- Tipografía Inter desde Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
-    <!-- EmailJS SDK -->
-    <script
-      type="text/javascript"
-      src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"
-    ></script>
+    <!-- Cargar primero el SDK de EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <script type="text/javascript">
       (function () {
         emailjs.init("HsIH8kppZjCosq9-S");
       })();
     </script>
 
-    <!-- FontAwesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <title>Soluciones Netsys S.A.S. | Tecnología a tu alcance</title>
 
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Vincular hoja de estilos CSS separada -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- Preloader -->
-    <div id="preloader">
-      <div class="spinner-container">
-        <img
-          src="main/LOGO-NETSYS.png"
-          alt="Netsys Logo"
-          class="spinner-logo-img"
-        />
-        <div class="spinner-line"></div>
-      </div>
+    <!-- Preloader Tecnológico -->
+   <div id="preloader">
+  <div class="preloader-content">
+    <img src="main/LOGO-NETSYS.png" alt="Cargando Soluciones Netsys" class="preloader-logo">
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
     </div>
+  </div>
+</div>
 
     <!-- Header & Navigation -->
     <header id="mainHeader">
       <nav class="navbar">
-        <a href="#" class="brand-logo">
-          <img src="main/LOGO-NETSYS.png" alt="Netsys Logo" class="logo-img" />
-          <span class="brand-text">
-            SOLUCIONES<br />
-            <strong>NETSYS S.A.S.</strong>
-          </span>
-        </a>
+       <a href="#" class="brand-logo">
+  <img src="main/LOGO-NETSYS.png" alt="Soluciones Netsys S.A.S." class="logo-img" />
+  <div class="logo-text">
+    <span class="logo-line1">SOLUCIONES</span>
+    <span class="logo-line2">NETSYS S.A.S.</span>
+  </div>
+</a>
 
+        <!-- Botón Hamburguesa -->
         <button class="hamburger-btn" id="hamburgerBtn" aria-label="Abrir menú">
           <i class="fa-solid fa-bars"></i>
         </button>
@@ -72,47 +66,36 @@
           <li><a href="#clientes">Clientes</a></li>
           <li><a href="#por-que-elegirnos">Por Qué Elegirnos</a></li>
           <li><a href="#contacto">Contacto</a></li>
-          <li class="mobile-only-btn">
-            <a href="#contacto" class="btn-header">Solicitar Cotización</a>
-          </li>
+          <!-- Enlace móvil para solicitar cotización -->
+          <li class="mobile-only-btn"><a href="main/catalogo.pdf" target="_blank" class="btn-mobile-quote"><i class="fa-solid fa-file-pdf"></i> Ver Catálogo (PDF)</a>
+        </li>
         </ul>
 
-        <a href="#contacto" class="btn-header desktop-only-btn"
-          >Solicitar Cotización</a
-        >
+        <!-- Botón Catálogo en Header -->
+        <a href="main/catalogo.pdf" target="_blank" class="btn-header">
+          <i class="fa-solid fa-file-pdf"></i> Ver Catálogo (PDF)
+        </a>
       </nav>
     </header>
 
     <!-- Hero Section -->
-    <section id="inicio" class="hero hero-modern">
-      <div class="hero-bg-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-      </div>
-
+    <section id="inicio" class="hero">
       <div class="hero-content reveal">
-        <span class="hero-badge"
-          ><i class="fa-solid fa-shield-halved"></i> Infraestructura &amp;
-          Ciberseguridad</span
-        >
-        <h1>Soluciones Tecnológicas Integrales para tu Empresa</h1>
-        <p>
-          Impulsamos tu negocio con innovación, ciberseguridad avanzada Fortinet y
-          soporte IT especializado de alta disponibilidad.
-        </p>
+        <h1>
+          Soluciones Tecnológicas Integrales Para tu Empresa
+        </h1>
 
+        <p>
+          Impulsamos tu negocio con innovación, seguridad y soporte IT especializado.
+        </p>
         <div class="hero-buttons">
-          <a href="main/catalogo.pdf" target="_blank" class="btn-hero-catalog">
-            <i class="fa-solid fa-file-pdf"></i> Ver Catálogo (PDF)
-          </a>
-          <a href="#servicios" class="btn-hero-secondary">
-            Nuestros Servicios
-          </a>
+          <a href="#contacto" class="btn-primary">Solicitar Cotización</a>
+          <a href="#servicios" class="btn-secondary">Nuestros Servicios</a>
         </div>
       </div>
     </section>
 
-    <!-- Estadísticas -->
+    <!-- Contador de Impacto -->
     <section class="stats-section reveal">
       <div class="stats-grid">
         <div class="stat-item">
@@ -130,7 +113,7 @@
       </div>
     </section>
 
-    <!-- Nosotros -->
+    <!-- About Section -->
     <section id="nosotros" class="section">
       <div class="section-title reveal">
         <h2>¿Quiénes Somos?</h2>
@@ -151,53 +134,63 @@
           <h3>Nuestra Misión</h3>
           <p>
             Proporcionar las tecnologías más innovadoras a la medida de las
-            necesidades empresariales, incrementando la competitividad y
-            productividad.
+            necesidades empresariales, con el objetivo de incrementar la
+            competitividad, productividad y calidad de vida cotidiana.
           </p>
         </div>
         <div class="about-card reveal">
           <i class="fa-solid fa-eye"></i>
           <h3>Nuestra Visión</h3>
           <p>
-            Consolidarnos como una empresa líder y eficiente en servicios
-            tecnológicos, reconocida nacionalmente por sus altos estándares de
-            calidad.
+            Consolidarnos como una empresa líder, eficiente y sólida en
+            servicios tecnológicos, reconocida a nivel nacional con los más
+            altos estándares de calidad y satisfacción al cliente.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Portafolio de Servicios -->
+    <!-- Services Section -->
     <section id="servicios" class="section" style="background: var(--white)">
       <div class="section-title reveal">
         <h2>Portafolio de Servicios</h2>
-        <p>Soluciones eficientes para potenciar su infraestructura IT</p>
+        <p>
+          Soluciones eficientes e innovadoras para potenciar su infraestructura
+          IT
+        </p>
       </div>
 
+      <!-- Botones de Filtro de Servicios -->
       <div class="services-filter reveal">
         <button class="filter-btn active" data-filter="all">Todos</button>
         <button class="filter-btn" data-filter="infra">
-          Infraestructura &amp; Hardware
+          Infraestructura & Hardware
         </button>
         <button class="filter-btn" data-filter="seguridad">
-          Seguridad &amp; Redes
+          Seguridad & Redes
         </button>
-        <button class="filter-btn" data-filter="cloud">Cloud &amp; Telecom</button>
+        <button class="filter-btn" data-filter="cloud">Cloud & Telecom</button>
       </div>
 
       <div class="services-grid">
         <div
           class="service-card reveal"
           data-category="seguridad"
-          onclick="openServiceModal('main/fortinet.jpg', 'Seguridad Informática Fortinet', 'Protección avanzada de redes, accesos y datos con tecnología Next-Gen Fortinet.')"
+          onclick="
+            openServiceModal(
+              'main/fortinet.jpg',
+              'Seguridad Informática Fortinet',
+              'Protección avanzada de redes, accesos y datos con tecnología Next-Gen Fortinet para mitigar amenazas y vulnerabilidades.',
+            )
+          "
         >
           <div class="service-icon">
             <i class="fa-solid fa-shield-halved"></i>
           </div>
           <h3>Seguridad Informática Fortinet</h3>
           <p>
-            Protección avanzada de redes, accesos y datos con tecnología Next-Gen
-            Fortinet.
+            Protección avanzada de redes, accesos y datos con tecnología
+            Next-Gen Fortinet para mitigar amenazas y vulnerabilidades.
           </p>
           <span class="card-link"
             >Ver detalles <i class="fa-solid fa-arrow-right"></i
@@ -207,15 +200,21 @@
         <div
           class="service-card reveal"
           data-category="infra"
-          onclick="openServiceModal('main/hwsw.jpg', 'Hardware y Software', 'Venta, instalación y mantenimiento preventivo/correctivo de equipos e licencias.')"
+          onclick="
+            openServiceModal(
+              'main/hwsw.jpg',
+              'Hardware y Software',
+              'Venta, instalación, actualización y mantenimiento preventivo y correctivo de equipos informáticos y licencias empresariales.',
+            )
+          "
         >
           <div class="service-icon">
             <i class="fa-solid fa-laptop-code"></i>
           </div>
           <h3>Hardware y Software</h3>
           <p>
-            Venta, instalación y mantenimiento preventivo y correctivo de
-            equipos informáticos.
+            Venta, instalación, actualización y mantenimiento preventivo y
+            correctivo de equipos informáticos y licencias empresariales.
           </p>
           <span class="card-link"
             >Ver detalles <i class="fa-solid fa-arrow-right"></i
@@ -225,13 +224,19 @@
         <div
           class="service-card reveal"
           data-category="cloud"
-          onclick="openServiceModal('main/cloud.jpg', 'Servicios Cloud / Nube', 'Implementación y gestión de soluciones en la nube con esquemas de respaldo seguro.')"
+          onclick="
+            openServiceModal(
+              'main/cloud.jpg',
+              'Servicios Cloud / Nube',
+              'Implementación, gestión y migración a soluciones en la nube con esquemas de respaldo seguro y alta disponibilidad.',
+            )
+          "
         >
           <div class="service-icon"><i class="fa-solid fa-cloud"></i></div>
           <h3>Servicios Cloud / Nube</h3>
           <p>
-            Migración y gestión de soluciones en la nube con esquemas de
-            respaldo seguro.
+            Implementación, gestión y migración a soluciones en la nube con
+            esquemas de respaldo seguro y alta disponibilidad.
           </p>
           <span class="card-link"
             >Ver detalles <i class="fa-solid fa-arrow-right"></i
@@ -241,15 +246,21 @@
         <div
           class="service-card reveal"
           data-category="seguridad"
-          onclick="openServiceModal('main/redes.jpg', 'Redes y Telecomunicaciones', 'Diseño y administración de redes estructurales cableadas e inalámbricas corporativas.')"
+          onclick="
+            openServiceModal(
+              'main/redes.jpg',
+              'Redes y Telecomunicaciones',
+              'Diseño, configuración y administración de redes estructurales cableadas e inalámbricas corporativas.',
+            )
+          "
         >
           <div class="service-icon">
             <i class="fa-solid fa-network-wired"></i>
           </div>
           <h3>Redes y Telecomunicaciones</h3>
           <p>
-            Diseño y administración de redes estructuradas cableadas e
-            inalámbricas corporativas.
+            Diseño, configuración y administración de redes estructurales
+            cableadas e inalámbricas corporativas.
           </p>
           <span class="card-link"
             >Ver detalles <i class="fa-solid fa-arrow-right"></i
@@ -259,13 +270,19 @@
         <div
           class="service-card reveal"
           data-category="seguridad"
-          onclick="openServiceModal('main/cctv.jpg', 'CCTV y Alarmas', 'Instalación y monitoreo de sistemas inteligentes de videovigilancia y control de accesos.')"
+          onclick="
+            openServiceModal(
+              'main/cctv.jpg',
+              'CCTV y Alarmas',
+              'Instalación y monitoreo de sistemas inteligentes de videovigilancia, seguridad electrónica y control de accesos.',
+            )
+          "
         >
           <div class="service-icon"><i class="fa-solid fa-video"></i></div>
           <h3>CCTV y Alarmas</h3>
           <p>
-            Instalación de sistemas inteligentes de videovigilancia y control
-            de accesos.
+            Instalación y monitoreo de sistemas inteligentes de videovigilancia,
+            seguridad electrónica y control de accesos.
           </p>
           <span class="card-link"
             >Ver detalles <i class="fa-solid fa-arrow-right"></i
@@ -275,13 +292,89 @@
         <div
           class="service-card reveal"
           data-category="infra"
-          onclick="openServiceModal('main/servidores.jpg', 'Servidores y Equipos', 'Venta, configuración, virtualización y soporte de servidores de alto rendimiento.')"
+          onclick="
+            openServiceModal(
+              'main/sonido.jpg',
+              'Sonido Ambiental',
+              'Implementación de sistemas de audio y sonorización profesional para oficinas, áreas corporativas y locales comerciales.',
+            )
+          "
+        >
+          <div class="service-icon">
+            <i class="fa-solid fa-volume-high"></i>
+          </div>
+          <h3>Sonido Ambiental</h3>
+          <p>
+            Implementación de sistemas de audio y sonorización profesional para
+            oficinas, áreas corporativas y locales comerciales.
+          </p>
+          <span class="card-link"
+            >Ver detalles <i class="fa-solid fa-arrow-right"></i
+          ></span>
+        </div>
+
+        <div
+          class="service-card reveal"
+          data-category="seguridad"
+          onclick="
+            openServiceModal(
+              'main/auditoria.jpg',
+              'Auditoría de Sistemas',
+              'Diagnóstico integral y análisis exhaustivo de infraestructura tecnológica, rendimiento y postura de ciberseguridad.',
+            )
+          "
+        >
+          <div class="service-icon">
+            <i class="fa-solid fa-magnifying-glass-chart"></i>
+          </div>
+          <h3>Auditoría de Sistemas</h3>
+          <p>
+            Diagnóstico integral y análisis exhaustivo de infraestructura
+            tecnológica, rendimiento y postura de ciberseguridad.
+          </p>
+          <span class="card-link"
+            >Ver detalles <i class="fa-solid fa-arrow-right"></i
+          ></span>
+        </div>
+
+        <div
+          class="service-card reveal"
+          data-category="infra"
+          onclick="
+            openServiceModal(
+              'main/servidores.jpg',
+              'Servidores y Equipos',
+              'Ventas, configuración, virtualización y soporte técnico de servidores de alto rendimiento, partes y accesorios.',
+            )
+          "
         >
           <div class="service-icon"><i class="fa-solid fa-server"></i></div>
           <h3>Servidores y Equipos</h3>
           <p>
-            Venta, virtualización y soporte técnico de servidores corporativos de
-            alto rendimiento.
+            Ventas, configuración, virtualización y soporte técnico de
+            servidores de alto rendimiento, partes y accesorios.
+          </p>
+          <span class="card-link"
+            >Ver detalles <i class="fa-solid fa-arrow-right"></i
+          ></span>
+        </div>
+
+        <div
+          class="service-card reveal"
+          data-category="cloud"
+          onclick="
+            openServiceModal(
+              'main/telefonia.jpg',
+              'Telefonía IP – Cloud',
+              'Implementación de centrales telefónicas IP en la nube para optimizar las comunicaciones internas y externas de la empresa.',
+            )
+          "
+        >
+          <div class="service-icon"><i class="fa-solid fa-headset"></i></div>
+          <h3>Telefonía IP – Cloud</h3>
+          <p>
+            Implementación de centrales telefónicas IP en la nube para optimizar
+            las comunicaciones internas y externas de la empresa.
           </p>
           <span class="card-link"
             >Ver detalles <i class="fa-solid fa-arrow-right"></i
@@ -290,69 +383,46 @@
       </div>
     </section>
 
-    <!-- Clientes & Testimonios -->
+    <!-- Section: Clientes & Testimonios -->
     <section id="clientes" class="clients-section reveal">
       <div class="section-title">
         <h2>Empresas que Confían en Nosotros</h2>
-        <p>Respaldo y experiencia demostrada en el sector</p>
+        <p>Respaldo, experiencia y opiniones que respaldan nuestro trabajo</p>
       </div>
 
+      <!-- Carrusel Infinito de Logos -->
       <div class="slider-container">
         <div class="slider-track">
           <div class="slide-logo">
-            <img
-              src="main/clientes/sierra-tecnologia.png"
-              alt="Sierra Tecnología"
-            />
+            <img src="main/clientes/sierra-tecnologia.png" alt="Sierra Tecnología" />
           </div>
           <div class="slide-logo">
-            <img
-              src="main/clientes/mulata.png"
-              alt="Mulata"
-              class="logo-dark-bg"
-            />
+            <img src="main/clientes/mulata.png" alt="Mulata" class="logo-dark-bg" />
           </div>
           <div class="slide-logo">
-            <img
-              src="main/clientes/coralina-island.png"
-              alt="Coralina Island"
-            />
+            <img src="main/clientes/coralina-island.png" alt="Coralina Island" />
           </div>
           <div class="slide-logo">
-            <img
-              src="main/clientes/isla-del-encanto.png"
-              alt="Hotel Isla del Encanto"
-            />
+            <img src="main/clientes/isla-del-encanto.png" alt="Hotel Isla del Encanto" />
           </div>
-          <!-- Loop Duplicado -->
+
+          <!-- Duplicado exacto -->
           <div class="slide-logo">
-            <img
-              src="main/clientes/sierra-tecnologia.png"
-              alt="Sierra Tecnología"
-            />
+            <img src="main/clientes/sierra-tecnologia.png" alt="Sierra Tecnología" />
           </div>
           <div class="slide-logo">
-            <img
-              src="main/clientes/mulata.png"
-              alt="Mulata"
-              class="logo-dark-bg"
-            />
+            <img src="main/clientes/mulata.png" alt="Mulata" class="logo-dark-bg" />
           </div>
           <div class="slide-logo">
-            <img
-              src="main/clientes/coralina-island.png"
-              alt="Coralina Island"
-            />
+            <img src="main/clientes/coralina-island.png" alt="Coralina Island" />
           </div>
           <div class="slide-logo">
-            <img
-              src="main/clientes/isla-del-encanto.png"
-              alt="Hotel Isla del Encanto"
-            />
+            <img src="main/clientes/isla-del-encanto.png" alt="Hotel Isla del Encanto" />
           </div>
         </div>
       </div>
 
+      <!-- Tarjetas de Testimonios -->
       <div class="testimonials-grid">
         <div class="testimonial-card">
           <div>
@@ -384,7 +454,8 @@
             </div>
             <p class="testimonial-text">
               "Respuesta inmediata ante cualquier eventualidad con nuestros
-              servidores. Su soporte técnico preventivo evita interrupciones."
+              servidores. Su soporte técnico preventivo nos ha evitado
+              interrupciones en la operación."
             </p>
           </div>
           <div class="testimonial-author">
@@ -398,18 +469,23 @@
       </div>
     </section>
 
-    <!-- Por Qué Elegirnos -->
+    <!-- Why Choose Us -->
     <section id="por-que-elegirnos" class="section why-us-bg">
       <div class="section-title reveal">
         <h2>¿Por Qué Elegirnos?</h2>
-        <p>Razones para confiar en Soluciones Netsys S.A.S.</p>
+        <p>
+          Razones para confiar en Soluciones Netsys S.A.S. como su aliado
+          tecnológico
+        </p>
       </div>
       <div class="features-grid">
         <div class="feature-item reveal">
           <i class="fa-solid fa-bolt"></i>
           <div>
             <h4>Atención Rápida</h4>
-            <p>Respuesta oportuna a sus requerimientos técnicos.</p>
+            <p>
+              Respuesta oportuna y personalizada a sus requerimientos técnicos.
+            </p>
           </div>
         </div>
         <div class="feature-item reveal">
@@ -423,7 +499,7 @@
           <i class="fa-solid fa-scale-balanced"></i>
           <div>
             <h4>Costo - Beneficio</h4>
-            <p>Precios competitivos adaptados a su presupuesto.</p>
+            <p>Precios competitivos adaptados a la medida de su presupuesto.</p>
           </div>
         </div>
         <div class="feature-item reveal">
@@ -433,6 +509,23 @@
             <p>Especialistas en la implementación de estándares Fortinet.</p>
           </div>
         </div>
+        <div class="feature-item reveal">
+          <i class="fa-solid fa-headset"></i>
+          <div>
+            <h4>Soporte Especializado</h4>
+            <p>
+              Personal técnico certificado listo para brindar acompañamiento
+              constante.
+            </p>
+          </div>
+        </div>
+        <div class="feature-item reveal">
+          <i class="fa-solid fa-microchip"></i>
+          <div>
+            <h4>Tecnología de Punta</h4>
+            <p>Uso de herramientas y hardware de última generación.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -440,37 +533,62 @@
     <section class="section faq-section">
       <div class="section-title reveal">
         <h2>Preguntas Frecuentes</h2>
-        <p>Aclaramos tus dudas principales sobre nuestros servicios</p>
+        <p>
+          Aclaramos tus dudas principales sobre nuestros servicios y
+          metodologías de trabajo
+        </p>
       </div>
       <div class="faq-container reveal">
         <div class="faq-item">
           <button class="faq-question">
-            <span>¿Cuál es el tiempo de respuesta ante emergencias?</span>
+            <span
+              >¿Cuál es el tiempo de respuesta ante una emergencia
+              técnica?</span
+            >
             <i class="fa-solid fa-chevron-down"></i>
           </button>
           <div class="faq-answer">
             <p>
-              Ofrecemos tiempos de respuesta prioritarios de menos de 2 horas
-              para eventos críticos en clientes con contrato de soporte.
+              Para clientes con contrato de soporte activo, ofrecemos tiempos de
+              respuesta prioritarios de menos de 2 horas para eventos críticos
+              de infraestructura o red.
             </p>
           </div>
         </div>
+
         <div class="faq-item">
           <button class="faq-question">
-            <span>¿Brindan atención a nivel nacional?</span>
+            <span
+              >¿Brindan atención y soporte a nivel nacional en Colombia?</span
+            >
             <i class="fa-solid fa-chevron-down"></i>
           </button>
           <div class="faq-answer">
             <p>
-              Sí. Brindamos soporte remoto nacional e implementación presencial en
-              la región Caribe y principales ciudades.
+              Sí. Brindamos soporte remoto a nivel nacional e
+              implementación/atención presencial estratégica en la región Caribe
+              y principales ciudades del país.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>¿Ofrecen soluciones de ciberseguridad para PYMES?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>
+              Absolutamente. Diseñamos esquemas de seguridad Fortinet y
+              firewalls gestionados a la medida de presupuestos de pequeñas y
+              medianas empresas.
             </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Contacto -->
+    <!-- Contact Section -->
     <section id="contacto" class="section">
       <div class="section-title reveal">
         <h2>Contáctanos</h2>
@@ -480,24 +598,45 @@
         <div class="contact-info">
           <div>
             <h3>Información de Contacto</h3>
-            <p style="margin-bottom: 2rem; color: #94a3b8">
-              Estamos a su disposición para resolver sus inquietudes.
+            <p style="margin-bottom: 2rem; color: #cbd5e1">
+              Estamos a su disposición para resolver sus inquietudes y presentar
+              propuestas a la medida.
             </p>
 
             <div class="info-item">
               <i class="fa-solid fa-location-dot"></i>
               <span
-                >Calle 42 #15 - 46, Torices<br />Cartagena – Colombia</span
+                >Calle 42 #15 - 46, Barrio Torices,<br />Cartagena – Bolívar,
+                Colombia</span
               >
             </div>
             <div class="info-item">
               <i class="fa-solid fa-phone"></i>
-              <span>+57 300 322 4309</span>
+              <span>+57 300 322 4309<br /></span>
             </div>
             <div class="info-item">
               <i class="fa-solid fa-envelope"></i>
               <span>gerencia@netsysas.com</span>
             </div>
+            <div class="info-item">
+              <i class="fa-solid fa-globe"></i>
+              <span>www.netsysas.com</span>
+            </div>
+
+
+<div class="map-container">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3924.316886290947!2d-75.538515!3d10.435015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDI2JzA2LjEiTiA3NcKwMzInMTguNyJX!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco&q=Calle+42+%2315+-+46,+Barrio+Torices,+Cartagena+-+Bol%C3%ADvar,+Colombia" 
+    width="100%" 
+    height="180" 
+    style="border:0;" 
+    allowfullscreen="" 
+    loading="lazy" 
+    referrerpolicy="no-referrer-when-downgrade">
+  </iframe>
+</div>
+
+
           </div>
           <div
             style="
@@ -510,7 +649,12 @@
           </div>
         </div>
 
-        <form class="contact-form" id="consultationForm">
+        <!-- Formulario EmailJS -->
+        <form
+          class="contact-form"
+          id="consultationForm"
+          onsubmit="handleFormSubmit(event)"
+        >
           <div class="form-group">
             <label for="nombre">Nombre Completo *</label>
             <input
@@ -565,6 +709,14 @@
               <option value="Redes y Telecomunicaciones">
                 Redes y Telecomunicaciones
               </option>
+              <option value="CCTV y Alarmas">CCTV y Alarmas</option>
+              <option value="Auditoría de Sistemas">
+                Auditoría de Sistemas
+              </option>
+              <option value="Servidores">Servidores y Suministros</option>
+              <option value="Creación de Páginas Web">
+                Creación de Páginas Web
+              </option>
               <option value="Otro">Otro / Consulta General</option>
             </select>
           </div>
@@ -575,19 +727,19 @@
               name="message"
               class="form-control"
               required
-              placeholder="Describa su requerimiento tecnológico..."
+              placeholder="Describa requerimiento o consulta tecnológica..."
             ></textarea>
           </div>
-          <button type="submit" class="btn-submit" id="btnSubmit">
+          <button type="submit" class="btn-submit">
             <i class="fa-solid fa-paper-plane"></i> Enviar mensaje
           </button>
         </form>
       </div>
     </section>
 
-    <!-- WhatsApp Floating Button -->
+    <!-- Floating WhatsApp Button -->
     <a
-      href="https://wa.me/573003224309?text=Hola,%20quisiera%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios"
+      href="https://wa.me/573003224309?text=Hola,%20quisiera%20solicitar%20informaci%C3%B3n%20sobre%20sus%20servicios%20tecnol%C3%B3gicos"
       class="whatsapp-float"
       target="_blank"
       title="Contactar por WhatsApp"
@@ -607,11 +759,7 @@
     </footer>
 
     <!-- Modal para Imágenes de Servicios -->
-    <div
-      id="serviceModal"
-      class="modal-overlay"
-      onclick="closeServiceModal(event)"
-    >
+    <div id="serviceModal" class="modal-overlay" onclick="closeServiceModal(event)">
       <div class="modal-content" onclick="event.stopPropagation()">
         <span class="modal-close" onclick="closeServiceModalForce()">&times;</span>
         <img id="modalImg" src="" alt="Servicio Netsys" class="modal-img" />
@@ -620,6 +768,7 @@
       </div>
     </div>
 
+    <!-- Cargar archivo de scripts separado -->
     <script src="script.js"></script>
   </body>
 </html>
