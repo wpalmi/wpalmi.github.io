@@ -1,8 +1,8 @@
-// 1. Cambiar estilo del Header al hacer scroll
+// 1. Cambiar header al hacer scroll
 window.addEventListener("scroll", function () {
   const header = document.getElementById("mainHeader");
   if (header) {
-    if (window.scrollY > 50) {
+    if (window.scrollY > 40) {
       header.classList.add("scrolled");
     } else {
       header.classList.remove("scrolled");
@@ -10,16 +10,14 @@ window.addEventListener("scroll", function () {
   }
 });
 
-// 2. Animación Scroll Reveal para elementos con la clase .reveal
+// 2. Scroll Reveal
 function revealOnScroll() {
   const reveals = document.querySelectorAll(".reveal");
   const windowHeight = window.innerHeight;
 
   reveals.forEach((reveal) => {
     const elementTop = reveal.getBoundingClientRect().top;
-    const elementVisible = 100;
-
-    if (elementTop < windowHeight - elementVisible) {
+    if (elementTop < windowHeight - 80) {
       reveal.classList.add("active");
     }
   });
@@ -28,7 +26,7 @@ function revealOnScroll() {
 window.addEventListener("scroll", revealOnScroll);
 window.addEventListener("load", revealOnScroll);
 
-// 3. Contadores Numéricos Animados
+// 3. Contadores
 let countersStarted = false;
 function startCounters() {
   const counterSection = document.querySelector(".stats-section");
@@ -44,16 +42,13 @@ function startCounters() {
     counters.forEach((counter) => {
       const target = +counter.getAttribute("data-target");
       let count = 0;
-      const speed = target / 50;
+      const speed = target / 40;
 
       const updateCount = () => {
         count += speed;
         if (count < target) {
-          if (target === 100) {
-            counter.innerText = Math.ceil(count) + "%";
-          } else {
-            counter.innerText = "+" + Math.ceil(count);
-          }
+          counter.innerText =
+            target === 100 ? Math.ceil(count) + "%" : "+" + Math.ceil(count);
           setTimeout(updateCount, 30);
         } else {
           counter.innerText = target === 100 ? target + "%" : "+" + target;
@@ -66,29 +61,33 @@ function startCounters() {
 
 window.addEventListener("scroll", startCounters);
 
-// 4. Envío de Formulario EmailJS
+// 4. Formulario EmailJS
 function handleFormSubmit(e) {
   e.preventDefault();
   const formElement = document.getElementById("consultationForm");
+  const btnSubmit = document.getElementById("btnSubmit");
 
   if (typeof emailjs !== "undefined") {
+    if (btnSubmit) btnSubmit.disabled = true;
+
     emailjs.sendForm("service_7s9fe2g", "template_3godeq6", formElement).then(
       function () {
-        alert("¡Gracias! Tu mensaje ha sido enviado exitosamente.");
+        alert("¡Gracias! Tu consulta ha sido enviada con éxito.");
         formElement.reset();
+        if (btnSubmit) btnSubmit.disabled = false;
       },
       function (error) {
-        alert("Ocurrió un error al enviar el mensaje. Inténtalo de nuevo.");
-        console.error("Error EmailJS:", error);
+        alert(
+          "Hubo un error al enviar el mensaje. Por favor intenta de nuevo.",
+        );
+        console.error("EmailJS Error:", error);
+        if (btnSubmit) btnSubmit.disabled = false;
       },
     );
-  } else {
-    alert("Error: El servicio de correo no se ha cargado correctamente.");
   }
 }
 
-// 5. Ventana Flotante (Modal) de Servicios
-// Exponer funciones al scope global para ser invocadas desde el HTML
+// 5. Modales globales
 window.openServiceModal = function (imageSrc, title, description) {
   const modal = document.getElementById("serviceModal");
   const modalImg = document.getElementById("modalImg");
@@ -119,9 +118,14 @@ window.closeServiceModal = function (event) {
   }
 };
 
-// 6. Lógica de Menú, FAQ y Filtros cuando el DOM esté listo
+// 6. Eventos DOM
 document.addEventListener("DOMContentLoaded", () => {
-  // --- Menú Hamburguesa ---
+  const formElement = document.getElementById("consultationForm");
+  if (formElement) {
+    formElement.addEventListener("submit", handleFormSubmit);
+  }
+
+  // Menú Mobile
   const hamburgerBtn = document.getElementById("hamburgerBtn");
   const navLinks = document.getElementById("navLinks");
   const icon = hamburgerBtn ? hamburgerBtn.querySelector("i") : null;
@@ -129,7 +133,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (hamburgerBtn && navLinks && icon) {
     hamburgerBtn.addEventListener("click", () => {
       navLinks.classList.toggle("active");
-
       if (navLinks.classList.contains("active")) {
         icon.classList.remove("fa-bars");
         icon.classList.add("fa-xmark");
@@ -142,13 +145,15 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".nav-links a").forEach((link) => {
       link.addEventListener("click", () => {
         navLinks.classList.remove("active");
-        icon.classList.remove("fa-xmark");
-        icon.classList.add("fa-bars");
+        if (icon) {
+          icon.classList.remove("fa-xmark");
+          icon.classList.add("fa-bars");
+        }
       });
     });
   }
 
-  // --- Acordeón FAQ ---
+  // FAQ Accordion
   document.querySelectorAll(".faq-question").forEach((button) => {
     button.addEventListener("click", () => {
       const faqItem = button.parentElement;
@@ -164,7 +169,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // --- Filtro de Servicios ---
+  // Filtros de servicios
   const filterButtons = document.querySelectorAll(".filter-btn");
   const serviceCards = document.querySelectorAll(".service-card");
 
@@ -187,12 +192,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// Ocultar Preloader al Cargar la Página
+// Quitar Preloader
 window.addEventListener("load", () => {
   const preloader = document.getElementById("preloader");
   if (preloader) {
     setTimeout(() => {
       preloader.classList.add("loaded");
-    }, 1200);
+    }, 500);
   }
 });
