@@ -1,0 +1,2090 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestión de Inventario y Actas IT</title>
+    <style>
+      :root {
+        --primary: #0056b3;
+        --secondary: #6c757d;
+        --success: #28a745;
+        --warning: #ffc107;
+        --danger: #dc3545;
+        --bg: #f8f9fa;
+        --border: #dee2e6;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--bg);
+        margin: 0;
+        padding: 20px;
+        color: #333;
+      }
+
+      .container {
+        max-width: 1250px;
+        margin: 0 auto;
+        background: white;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      header {
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      h1 {
+        margin: 0;
+        color: var(--primary);
+        font-size: 24px;
+      }
+      .subtitle {
+        font-size: 14px;
+        color: var(--secondary);
+        margin-top: 5px;
+      }
+
+      .tabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid var(--border);
+        flex-wrap: wrap;
+      }
+
+      .tab-btn {
+        padding: 10px 18px;
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-weight: bold;
+        color: var(--secondary);
+        border-bottom: 3px solid transparent;
+        transition: all 0.2s ease-in-out;
+      }
+
+      .tab-btn.active {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+      }
+
+      .subtabs {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+      }
+      .subtab-btn {
+        padding: 6px 14px;
+        border: 1px solid var(--border);
+        background: #f1f3f5;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 600;
+      }
+
+      .subtab-btn.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--primary);
+      }
+
+      .tab-content,
+      .subtab-content {
+        display: none;
+      }
+      .tab-content.active,
+      .subtab-content.active {
+        display: block;
+      }
+
+      .grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 18px;
+        background: #fff;
+        margin-bottom: 20px;
+      }
+
+      .card-title {
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: var(--primary);
+        border-bottom: 1px solid #eee;
+        padding-bottom: 8px;
+      }
+
+      .form-group {
+        margin-bottom: 12px;
+      }
+
+      label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 4px;
+        color: #495057;
+      }
+
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        box-sizing: border-box;
+        font-size: 13px;
+      }
+
+      .row {
+        display: flex;
+        gap: 10px;
+      }
+      .row .form-group {
+        flex: 1;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+        justify-content: flex-end;
+      }
+
+      .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 12px;
+        transition: all 0.2s ease-in-out;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: white;
+      }
+      .btn-success {
+        background: var(--success);
+        color: white;
+      }
+      .btn-secondary {
+        background: var(--secondary);
+        color: white;
+      }
+      .btn-danger {
+        background: var(--danger);
+        color: white;
+      }
+
+      .badge {
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 11px;
+        font-weight: bold;
+        display: inline-block;
+      }
+
+      .bg-asignado {
+        background-color: var(--primary);
+        color: white;
+      }
+      .bg-disponible {
+        background-color: var(--success);
+        color: white;
+      }
+      .bg-mantenimiento {
+        background-color: var(--warning);
+        color: #333;
+      }
+      .bg-baja {
+        background-color: var(--danger);
+        color: white;
+      }
+
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(3px);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .modal-card {
+        background: white;
+        width: 500px;
+        max-width: 90%;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .canvas-container {
+        border: 1px dashed var(--secondary);
+        background: #fafafa;
+        border-radius: 4px;
+      }
+      canvas {
+        width: 100%;
+        height: 120px;
+        cursor: crosshair;
+        touch-action: none;
+      }
+
+      #view-login {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #e9ecef;
+        justify-content: center;
+        align-items: center;
+        z-index: 9000;
+      }
+
+      .login-box {
+        background: white;
+        width: 360px;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        border-top: 5px solid var(--primary);
+      }
+
+      .toast-container {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 9999;
+      }
+      .toast {
+        background: #28a745;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 6px;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .toast.error {
+        background: #dc3545;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        font-size: 13px;
+      }
+      th,
+      td {
+        padding: 8px 10px;
+        text-align: left;
+        vertical-align: middle;
+        border-bottom: 1px solid #f0f0f0;
+      }
+      th {
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      .acta-print-box {
+        background: white;
+        padding: 20px;
+        border: 1px solid #ccc;
+        font-family: Arial, sans-serif;
+        color: #000;
+      }
+
+      @media print {
+        body * {
+          visibility: hidden;
+        }
+        #modalVisorActa,
+        #modalVisorActa * {
+          visibility: visible;
+        }
+        #modalVisorActa {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          background: white;
+        }
+        .no-print {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- VISTA LOGIN -->
+    <div id="view-login">
+      <div class="login-box">
+        <h2
+          style="
+            margin-top: 0;
+            color: var(--primary);
+            font-size: 20px;
+            text-align: center;
+          "
+        >
+          Acceso al Sistema IT
+        </h2>
+        <p
+          style="
+            font-size: 12px;
+            color: var(--secondary);
+            text-align: center;
+            margin-bottom: 20px;
+          "
+        >
+          Credenciales Corporativas
+        </p>
+        <div class="form-group">
+          <label>Usuario</label
+          ><input type="text" id="login_usuario" placeholder="Ej. wpalmieri" />
+        </div>
+        <div class="form-group">
+          <label>Contraseña</label
+          ><input type="password" id="login_password" placeholder="••••••••" />
+        </div>
+        <button
+          class="btn btn-primary"
+          style="width: 100%; margin-top: 15px; padding: 10px"
+          onclick="iniciarSesion()"
+        >
+          Iniciar Sesión
+        </button>
+      </div>
+    </div>
+
+    <!-- PORTAL PRINCIPAL -->
+    <div class="container" id="app-portal" style="display: none">
+      <header>
+        <div>
+          <h1>Gestión de Inventarios y Actas IT</h1>
+          <div class="subtitle">
+            Plataforma Integral de Activos Tecnológicos
+          </div>
+        </div>
+        <div style="display: flex; align-items: center; gap: 15px">
+          <div style="text-align: right">
+            <div
+              id="lblUsuarioNombre"
+              style="font-weight: bold; font-size: 13px; color: var(--primary)"
+            >
+              ---
+            </div>
+            <div
+              id="lblUsuarioRol"
+              style="font-size: 11px; color: var(--secondary); font-weight: 600"
+            >
+              ---
+            </div>
+          </div>
+          <button
+            class="btn btn-secondary"
+            style="padding: 5px 10px; font-size: 11px"
+            onclick="cerrarSesion()"
+          >
+            🚪 Salir
+          </button>
+        </div>
+      </header>
+
+      <!-- BARRA DE NAVEGACIÓN -->
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(event, 'asignacion')">
+          Asignación / Devolución
+        </button>
+        <button
+          class="tab-btn"
+          onclick="
+            switchTab(event, 'inventario');
+            cargarTablaInventario();
+          "
+        >
+          Consulta Inventario
+        </button>
+        <button
+          class="tab-btn"
+          onclick="
+            switchTab(event, 'consultactas');
+            cargarTablaActas();
+          "
+        >
+          📄 Consulta de Actas
+        </button>
+        <button
+          class="tab-btn"
+          id="btnTabLogs"
+          onclick="
+            switchTab(event, 'logs');
+            cargarLogsSistema();
+          "
+        >
+          📋 Logs Auditoría
+        </button>
+        <button
+          class="tab-btn"
+          id="btnTabConfig"
+          onclick="
+            switchTab(event, 'config');
+            cargarConfiguracion();
+          "
+        >
+          ⚙️ Configuración
+        </button>
+      </div>
+
+      <!-- PESTAÑA 1: ASIGNACIÓN / DEVOLUCIÓN -->
+      <div id="tab-asignacion" class="tab-content active">
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">1. Búsqueda y Datos del Equipo</div>
+            <div class="form-group">
+              <label>Placa de Inventario / Serial *</label>
+              <div class="row">
+                <input
+                  type="text"
+                  id="asig_placa"
+                  placeholder="Ej. 10001 o Serial"
+                />
+                <button class="btn btn-primary" onclick="buscarEquipo()">
+                  Buscar
+                </button>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label>Tipo</label><input type="text" id="asig_tipo" readonly />
+              </div>
+              <div class="form-group">
+                <label>Marca</label
+                ><input type="text" id="asig_marca" readonly />
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label>Modelo</label
+                ><input type="text" id="asig_modelo" readonly />
+              </div>
+              <div class="form-group">
+                <label>Serial</label
+                ><input type="text" id="asig_serial" readonly />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Hostname / Nombre Máquina</label
+              ><input type="text" id="asig_hostname" />
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-title">2. Datos del Colaborador / Usuario</div>
+            <div class="form-group">
+              <label>Cédula del Usuario *</label>
+              <div class="row">
+                <input type="text" id="asig_cedula" placeholder="Ej. 10001" />
+                <button class="btn btn-primary" onclick="buscarColaborador()">
+                  Buscar
+                </button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Nombre Completo</label
+              ><input type="text" id="asig_nombre" readonly />
+            </div>
+            <div class="row">
+              <div class="form-group">
+                <label>Gerencia / Área</label
+                ><input type="text" id="asig_gerencia" readonly />
+              </div>
+              <div class="form-group">
+                <label>Sede / Ciudad</label
+                ><input type="text" id="asig_sede" readonly />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Ingeniero IT Responsable *</label>
+              <select id="asig_ingeniero">
+                <option value="">Cargando técnicos...</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">3. Detalle de Operación y Firma Digital</div>
+          <div class="row">
+            <div class="form-group">
+              <label>Tipo de Servicio</label>
+              <select id="asig_servicio">
+                <option value="REQUERIMIENTO">Requerimiento</option>
+                <option value="INCIDENTE">Incidente</option>
+                <option value="IMAC">IMAC</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Fecha</label><input type="date" class="fecha-actual" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Observaciones IT</label
+            ><textarea id="asig_obs" rows="2"></textarea>
+          </div>
+
+          <div class="grid-2" style="margin-top: 15px">
+            <div>
+              <label>Firma Colaborador</label>
+              <div class="canvas-container">
+                <canvas id="canvasFirmaColaborador"></canvas>
+              </div>
+              <div style="display: flex; gap: 5px; margin-top: 4px">
+                <button
+                  class="btn btn-secondary"
+                  style="padding: 2px 8px; font-size: 11px"
+                  onclick="limpiarCanvas('canvasFirmaColaborador')"
+                >
+                  Limpiar Firma
+                </button>
+                <button
+                  class="btn btn-primary"
+                  style="padding: 2px 8px; font-size: 11px"
+                  onclick="
+                    document.getElementById('fileFirmaColaborador').click()
+                  "
+                >
+                  📂 Importar Firma
+                </button>
+                <input
+                  type="file"
+                  id="fileFirmaColaborador"
+                  accept="image/*"
+                  style="display: none"
+                  onchange="
+                    importarImagenFirma('canvasFirmaColaborador', event)
+                  "
+                />
+              </div>
+            </div>
+            <div>
+              <label>Firma Ingeniero IT</label>
+              <div class="canvas-container">
+                <canvas id="canvasFirmaIngeniero"></canvas>
+              </div>
+              <div style="display: flex; gap: 5px; margin-top: 4px">
+                <button
+                  class="btn btn-secondary"
+                  style="padding: 2px 8px; font-size: 11px"
+                  onclick="limpiarCanvas('canvasFirmaIngeniero')"
+                >
+                  Limpiar Firma
+                </button>
+                <button
+                  class="btn btn-primary"
+                  style="padding: 2px 8px; font-size: 11px"
+                  onclick="
+                    document.getElementById('fileFirmaIngeniero').click()
+                  "
+                >
+                  📂 Importar Firma
+                </button>
+                <input
+                  type="file"
+                  id="fileFirmaIngeniero"
+                  accept="image/*"
+                  style="display: none"
+                  onchange="importarImagenFirma('canvasFirmaIngeniero', event)"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button
+              class="btn btn-success"
+              onclick="guardarMovimiento('ASIGNACION')"
+            >
+              Registrar Asignación con Firma
+            </button>
+            <button
+              class="btn btn-primary"
+              onclick="guardarMovimiento('DEVOLUCION')"
+            >
+              Registrar Devolución con Firma
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PESTAÑA 2: INVENTARIO -->
+      <div id="tab-inventario" class="tab-content">
+        <div class="card">
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 15px;
+            "
+          >
+            <div class="card-title" style="margin: 0">
+              Catálogo General de Equipos
+            </div>
+            <button class="btn btn-success" onclick="mostrarModalEquipo()">
+              + Registrar Nuevo Equipo
+            </button>
+          </div>
+          <input
+            type="text"
+            id="buscadorInventario"
+            onkeyup="filtrarTabla()"
+            placeholder="🔍 Buscar por placa, marca, serial, usuario..."
+            style="margin-bottom: 10px"
+          />
+          <table>
+            <thead>
+              <tr>
+                <th>Placa</th>
+                <th>Tipo</th>
+                <th>Marca / Modelo</th>
+                <th>Serial</th>
+                <th>Hostname</th>
+                <th>Usuario Asignado</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-inventario-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PESTAÑA 3: ACTAS -->
+      <div id="tab-consultactas" class="tab-content">
+        <div class="card">
+          <div class="card-title">Histórico de Actas Generadas</div>
+          <input
+            type="text"
+            id="buscadorActas"
+            onkeyup="filtrarTablaActas()"
+            placeholder="🔍 Buscar por N° Acta, Placa, Cédula..."
+            style="margin-bottom: 15px"
+          />
+          <table>
+            <thead>
+              <tr>
+                <th>N° Acta</th>
+                <th>Tipo</th>
+                <th>Fecha</th>
+                <th>Equipo / Placa</th>
+                <th>Colaborador</th>
+                <th>Ingeniero IT</th>
+                <th>Adjunto Escaneado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-actas-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PESTAÑA 4: LOGS -->
+      <div id="tab-logs" class="tab-content">
+        <div class="card">
+          <div class="card-title">Logs de Auditoría de Sistema</div>
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Usuario</th>
+                <th>Acción</th>
+                <th>Detalle</th>
+              </tr>
+            </thead>
+            <tbody id="tabla-logs-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PESTAÑA 5: CONFIGURACIÓN MÁSTER -->
+      <div id="tab-config" class="tab-content">
+        <div class="subtabs">
+          <button class="subtab-btn active" onclick="switchSubTab('users')">
+            Usuarios Sistema
+          </button>
+          <button class="subtab-btn" onclick="switchSubTab('colaboradores')">
+            Colaboradores
+          </button>
+          <button class="subtab-btn" onclick="switchSubTab('parametros')">
+            Marcas, Tipos y Sedes
+          </button>
+        </div>
+
+        <div id="subtab-users" class="subtab-content active">
+          <div class="card">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+              "
+            >
+              <div class="card-title" style="margin: 0">
+                Usuarios del Sistema
+              </div>
+              <button class="btn btn-success" onclick="abrirModalUsuario()">
+                + Nuevo Usuario Sistema
+              </button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nombre</th>
+                  <th>Usuario</th>
+                  <th>Rol</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-usuarios-sistema-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="subtab-colaboradores" class="subtab-content">
+          <div class="card">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+              "
+            >
+              <div class="card-title" style="margin: 0">
+                Directorio de Colaboradores
+              </div>
+              <button
+                class="btn btn-success"
+                onclick="abrirModalColaboradorDirecto()"
+              >
+                + Nuevo Colaborador
+              </button>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Cédula</th>
+                  <th>Nombre Completo</th>
+                  <th>Gerencia</th>
+                  <th>Sede</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="tabla-colaboradores-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div id="subtab-parametros" class="subtab-content">
+          <div class="grid-2">
+            <div class="card">
+              <div class="card-title">Categorías Máster</div>
+              <div class="form-group">
+                <label>Tipo de Parámetro</label>
+                <select
+                  id="param_tipo_select"
+                  onchange="cargarParametrosTabla()"
+                >
+                  <option value="MARCA">Marcas</option>
+                  <option value="TIPO_EQUIPO">Tipos de Equipo</option>
+                  <option value="SEDE">Sedes / Ciudades</option>
+                  <option value="GERENCIA">Gerencias / Áreas</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Nuevo Valor *</label>
+                <input
+                  type="text"
+                  id="param_nuevo_valor"
+                  placeholder="Ej. Dell, Laptop, Medellín"
+                />
+              </div>
+              <button class="btn btn-success" onclick="guardarParametro()">
+                + Agregar Parámetro
+              </button>
+            </div>
+
+            <div class="card">
+              <div class="card-title">Valores Registrados</div>
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Valor</th>
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-parametros-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL DE CONFIRMACIÓN PERSONALIZADO -->
+    <div id="modalConfirmacion" class="modal-overlay">
+      <div class="modal-card" style="width: 400px; text-align: center">
+        <h3 style="margin-top: 0; color: var(--danger)">⚠️ Confirmar Acción</h3>
+        <p
+          id="modalConfirmacionMensaje"
+          style="font-size: 13px; color: #555; margin: 15px 0"
+        >
+          ¿Está seguro de que desea realizar esta acción?
+        </p>
+        <div class="actions" style="justify-content: center; gap: 10px">
+          <button
+            class="btn btn-secondary"
+            onclick="cerrarModalGeneral('modalConfirmacion')"
+          >
+            Cancelar
+          </button>
+          <button id="btnConfirmarAccion" class="btn btn-danger">
+            Confirmar / Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL COLABORADORES (CREAR Y EDITAR) -->
+    <div id="modalColaborador" class="modal-overlay">
+      <div class="modal-card">
+        <h3 id="colabModalTitulo" style="margin-top: 0; color: var(--primary)">
+          Registrar Colaborador
+        </h3>
+        <div class="form-group">
+          <label>Cédula *</label><input type="text" id="colab_cedula" />
+        </div>
+        <div class="form-group">
+          <label>Nombre Completo *</label
+          ><input type="text" id="colab_nombre" />
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label>Gerencia / Área *</label>
+            <select id="colab_gerencia">
+              <option value="">Cargando...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Sede / Ciudad *</label>
+            <select id="colab_sede">
+              <option value="">Cargando...</option>
+            </select>
+          </div>
+        </div>
+        <div class="actions">
+          <button
+            class="btn btn-secondary"
+            onclick="cerrarModalGeneral('modalColaborador')"
+          >
+            Cancelar
+          </button>
+          <button class="btn btn-success" onclick="guardarColaboradorModal()">
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL REGISTRO/EDICIÓN EQUIPO -->
+    <div id="modalEquipo" class="modal-overlay">
+      <div class="modal-card">
+        <h3 id="modalTitulo" style="margin-top: 0; color: var(--primary)">
+          Registrar Equipo
+        </h3>
+        <input type="hidden" id="edit_placa_original" />
+        <div class="form-group">
+          <label>Placa de Inventario *</label
+          ><input type="text" id="edit_placa" />
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label>Tipo de Equipo *</label>
+            <select id="edit_tipo">
+              <option value="">Cargando...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Marca *</label>
+            <select id="edit_marca">
+              <option value="">Cargando...</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label>Modelo *</label><input type="text" id="edit_modelo" />
+          </div>
+          <div class="form-group">
+            <label>Serial *</label><input type="text" id="edit_serial" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label>Hostname</label><input type="text" id="edit_hostname" />
+          </div>
+          <div class="form-group">
+            <label>Estado</label>
+            <select id="edit_estado">
+              <option value="Disponible">Disponible</option>
+              <option value="Asignado">Asignado</option>
+              <option value="Mantenimiento">Mantenimiento</option>
+              <option value="Baja">Baja</option>
+            </select>
+          </div>
+        </div>
+        <div class="actions">
+          <button
+            class="btn btn-secondary"
+            onclick="cerrarModalGeneral('modalEquipo')"
+          >
+            Cancelar
+          </button>
+          <button class="btn btn-success" onclick="guardarCambiosModal()">
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL USUARIOS SISTEMA -->
+    <div id="modalUsuarioSistema" class="modal-overlay">
+      <div class="modal-card">
+        <h3
+          id="modalUsuarioTitulo"
+          style="margin-top: 0; color: var(--primary)"
+        >
+          Nuevo Usuario del Sistema
+        </h3>
+        <input type="hidden" id="usr_id" />
+        <div class="form-group">
+          <label>Nombre Completo *</label><input type="text" id="usr_nombre" />
+        </div>
+        <div class="row">
+          <div class="form-group">
+            <label>Usuario *</label><input type="text" id="usr_usuario" />
+          </div>
+          <div class="form-group">
+            <label>Contraseña</label
+            ><input
+              type="password"
+              id="usr_password"
+              placeholder="Opcional al editar"
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Rol de Sistema *</label>
+          <select id="usr_rol">
+            <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+            <option value="TECNICO">TECNICO</option>
+            <option value="AUDITOR">AUDITOR</option>
+          </select>
+        </div>
+        <div class="actions">
+          <button
+            class="btn btn-secondary"
+            onclick="cerrarModalGeneral('modalUsuarioSistema')"
+          >
+            Cancelar
+          </button>
+          <button class="btn btn-success" onclick="guardarUsuarioSistema()">
+            Guardar Usuario
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL HOJA DE VIDA -->
+    <div id="modalHojaVida" class="modal-overlay">
+      <div class="modal-card" style="width: 750px">
+        <h3 id="hv_titulo" style="margin-top: 0; color: var(--primary)">
+          Hoja de Vida del Equipo
+        </h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Operación</th>
+              <th>Colaborador</th>
+              <th>Registrado Por</th>
+              <th>Observaciones</th>
+            </tr>
+          </thead>
+          <tbody id="tabla-hojavida-body"></tbody>
+        </table>
+        <div class="actions">
+          <button
+            class="btn btn-secondary"
+            onclick="cerrarModalGeneral('modalHojaVida')"
+          >
+            Cerrar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL SUBIR PDF -->
+    <div id="modalSubirPdf" class="modal-overlay">
+      <div class="modal-card">
+        <h3 style="margin-top: 0; color: var(--primary)">
+          Adjuntar PDF Escaneado
+        </h3>
+        <input type="hidden" id="pdf_acta_id" />
+        <div class="form-group">
+          <label>Archivo PDF *</label
+          ><input type="file" id="pdf_file_input" accept="application/pdf" />
+        </div>
+        <div class="actions">
+          <button
+            class="btn btn-secondary"
+            onclick="cerrarModalGeneral('modalSubirPdf')"
+          >
+            Cancelar
+          </button>
+          <button class="btn btn-success" onclick="guardarPdfAdjunto()">
+            Subir PDF
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL VISOR ACTA -->
+    <div id="modalVisorActa" class="modal-overlay">
+      <div class="modal-card" style="width: 700px">
+        <div
+          class="no-print"
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+          "
+        >
+          <h3 style="margin: 0; color: var(--primary)">Vista Previa de Acta</h3>
+          <div>
+            <button class="btn btn-primary" onclick="window.print()">
+              🖨️ Imprimir / PDF
+            </button>
+            <button
+              class="btn btn-secondary"
+              onclick="cerrarModalGeneral('modalVisorActa')"
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
+        <div id="contenidoActaImpresion" class="acta-print-box"></div>
+      </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+
+    <script>
+      const API_URL = "http://localhost:3000/api";
+      let modoModal = "CREAR";
+      let usuarioSesion = null;
+      let funcionConfirmarCallback = null;
+
+      document.addEventListener("DOMContentLoaded", () => {
+        verificarSesion();
+        cargarIngenieros();
+        inicializarCanvas("canvasFirmaColaborador");
+        inicializarCanvas("canvasFirmaIngeniero");
+        const hoy = new Date().toISOString().split("T")[0];
+        document
+          .querySelectorAll(".fecha-actual")
+          .forEach((input) => (input.value = hoy));
+      });
+
+      // CONFIRMACIÓN PERSONALIZADA
+      function solicitarConfirmacion(mensaje, callback) {
+        document.getElementById("modalConfirmacionMensaje").innerText = mensaje;
+        funcionConfirmarCallback = callback;
+        const btn = document.getElementById("btnConfirmarAccion");
+
+        btn.onclick = async function () {
+          cerrarModalGeneral("modalConfirmacion");
+          if (funcionConfirmarCallback) await funcionConfirmarCallback();
+        };
+
+        document.getElementById("modalConfirmacion").style.display = "flex";
+      }
+
+      // CANVAS FIRMAS Y CARGA DE IMAGEN
+      function inicializarCanvas(idCanvas) {
+        const canvas = document.getElementById(idCanvas);
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        let dibujando = false;
+
+        function resize() {
+          canvas.width = canvas.parentElement.clientWidth;
+          canvas.height = 120;
+          ctx.lineWidth = 2;
+          ctx.lineCap = "round";
+          ctx.strokeStyle = "#000";
+        }
+        resize();
+
+        function getPos(e) {
+          const rect = canvas.getBoundingClientRect();
+          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+          return { x: clientX - rect.left, y: clientY - rect.top };
+        }
+
+        canvas.addEventListener("mousedown", (e) => {
+          dibujando = true;
+          ctx.beginPath();
+          const p = getPos(e);
+          ctx.moveTo(p.x, p.y);
+        });
+        canvas.addEventListener("mousemove", (e) => {
+          if (dibujando) {
+            const p = getPos(e);
+            ctx.lineTo(p.x, p.y);
+            ctx.stroke();
+          }
+        });
+        canvas.addEventListener("mouseup", () => (dibujando = false));
+        canvas.addEventListener("touchstart", (e) => {
+          dibujando = true;
+          ctx.beginPath();
+          const p = getPos(e);
+          ctx.moveTo(p.x, p.y);
+        });
+        canvas.addEventListener("touchmove", (e) => {
+          if (dibujando) {
+            const p = getPos(e);
+            ctx.lineTo(p.x, p.y);
+            ctx.stroke();
+          }
+        });
+        canvas.addEventListener("touchend", () => (dibujando = false));
+      }
+
+      function limpiarCanvas(idCanvas) {
+        const canvas = document.getElementById(idCanvas);
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+
+      function importarImagenFirma(idCanvas, event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          const img = new Image();
+          img.onload = function () {
+            const canvas = document.getElementById(idCanvas);
+            const ctx = canvas.getContext("2d");
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const hRatio = canvas.width / img.width;
+            const vRatio = canvas.height / img.height;
+            const ratio = Math.min(hRatio, vRatio);
+            const centerShift_x = (canvas.width - img.width * ratio) / 2;
+            const centerShift_y = (canvas.height - img.height * ratio) / 2;
+
+            ctx.drawImage(
+              img,
+              0,
+              0,
+              img.width,
+              img.height,
+              centerShift_x,
+              centerShift_y,
+              img.width * ratio,
+              img.height * ratio,
+            );
+          };
+          img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+
+      function obtenerFirmaBase64(idCanvas) {
+        const canvas = document.getElementById(idCanvas);
+        return canvas ? canvas.toDataURL("image/png") : null;
+      }
+
+      // LOGIN Y SESIÓN
+      async function iniciarSesion() {
+        const usr = document.getElementById("login_usuario").value.trim();
+        const pass = document.getElementById("login_password").value.trim();
+        if (!usr || !pass)
+          return mostrarNotificacion("Ingrese credenciales.", "error");
+
+        const res = await fetch(`${API_URL}/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ usuario: usr, password: pass }),
+        });
+        const data = await res.json();
+        if (data.ok) {
+          sessionStorage.setItem(
+            "usuario_sesion",
+            JSON.stringify(data.usuario),
+          );
+          verificarSesion();
+          mostrarNotificacion(`Bienvenido, ${data.usuario.nombre}`);
+        } else {
+          mostrarNotificacion("Error: " + data.error, "error");
+        }
+      }
+
+      function verificarSesion() {
+        const sesionGuardada = sessionStorage.getItem("usuario_sesion");
+        if (sesionGuardada) {
+          usuarioSesion = JSON.parse(sesionGuardada);
+          document.getElementById("view-login").style.display = "none";
+          document.getElementById("app-portal").style.display = "block";
+          document.getElementById("lblUsuarioNombre").innerText =
+            usuarioSesion.nombre;
+          document.getElementById("lblUsuarioRol").innerText =
+            `ROL: ${usuarioSesion.rol}`;
+          aplicarPermisosRol();
+        } else {
+          document.getElementById("view-login").style.display = "flex";
+          document.getElementById("app-portal").style.display = "none";
+        }
+      }
+
+      function cerrarSesion() {
+        sessionStorage.removeItem("usuario_sesion");
+        usuarioSesion = null;
+        verificarSesion();
+      }
+
+      function aplicarPermisosRol() {
+        if (!usuarioSesion) return;
+        const rol = usuarioSesion.rol;
+        document.getElementById("btnTabConfig").style.display =
+          rol === "ADMINISTRADOR" ? "inline-block" : "none";
+        document.getElementById("btnTabLogs").style.display =
+          rol === "ADMINISTRADOR" || rol === "AUDITOR"
+            ? "inline-block"
+            : "none";
+      }
+
+      function switchTab(evt, tabId) {
+        document
+          .querySelectorAll(".tab-content")
+          .forEach((c) => c.classList.remove("active"));
+        document
+          .querySelectorAll(".tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        document.getElementById("tab-" + tabId).classList.add("active");
+        if (evt && evt.currentTarget) evt.currentTarget.classList.add("active");
+      }
+
+      function switchSubTab(subTabId) {
+        document
+          .querySelectorAll(".subtab-content")
+          .forEach((c) => c.classList.remove("active"));
+        document
+          .querySelectorAll(".subtab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        document.getElementById("subtab-" + subTabId).classList.add("active");
+        event.currentTarget.classList.add("active");
+      }
+
+      function cerrarModalGeneral(id) {
+        document.getElementById(id).style.display = "none";
+      }
+
+      // LOGS AUDITORÍA
+      async function cargarLogsSistema() {
+        const res = await fetch(`${API_URL}/logs`);
+        const logs = await res.json();
+        const tbody = document.getElementById("tabla-logs-body");
+        tbody.innerHTML = "";
+        logs.forEach((l) => {
+          tbody.innerHTML += `<tr><td>${l.id}</td><td>${new Date(l.fecha).toLocaleString()}</td><td><b>${l.usuario}</b></td><td><span class="badge bg-asignado">${l.accion}</span></td><td>${l.detalle}</td></tr>`;
+        });
+      }
+
+      // SELECTS DESPLEGABLES ASÍNCRONOS
+      async function cargarSelectsEquipo() {
+        try {
+          const [resT, resM] = await Promise.all([
+            fetch(`${API_URL}/parametros/TIPO_EQUIPO`),
+            fetch(`${API_URL}/parametros/MARCA`),
+          ]);
+
+          const tipos = await resT.json();
+          const marcas = await resM.json();
+
+          const selectTipo = document.getElementById("edit_tipo");
+          const selectMarca = document.getElementById("edit_marca");
+
+          selectTipo.innerHTML = '<option value="">Seleccione Tipo...</option>';
+          tipos.forEach(
+            (t) =>
+              (selectTipo.innerHTML += `<option value="${t.valor}">${t.valor}</option>`),
+          );
+
+          selectMarca.innerHTML =
+            '<option value="">Seleccione Marca...</option>';
+          marcas.forEach(
+            (m) =>
+              (selectMarca.innerHTML += `<option value="${m.valor}">${m.valor}</option>`),
+          );
+        } catch (err) {
+          console.error("Error al cargar desplegables de equipo:", err);
+        }
+      }
+
+      async function cargarSelectsColaborador() {
+        try {
+          const [resG, resS] = await Promise.all([
+            fetch(`${API_URL}/parametros/GERENCIA`),
+            fetch(`${API_URL}/parametros/SEDE`),
+          ]);
+
+          const gerencias = await resG.json();
+          const sedes = await resS.json();
+
+          const selectG = document.getElementById("colab_gerencia");
+          const selectS = document.getElementById("colab_sede");
+
+          selectG.innerHTML =
+            '<option value="">Seleccione Gerencia...</option>';
+          gerencias.forEach(
+            (g) =>
+              (selectG.innerHTML += `<option value="${g.valor}">${g.valor}</option>`),
+          );
+
+          selectS.innerHTML = '<option value="">Seleccione Sede...</option>';
+          sedes.forEach(
+            (s) =>
+              (selectS.innerHTML += `<option value="${s.valor}">${s.valor}</option>`),
+          );
+        } catch (err) {
+          console.error("Error al cargar desplegables de colaborador:", err);
+        }
+      }
+
+      async function cargarIngenieros() {
+        try {
+          const res = await fetch(`${API_URL}/usuarios-sistema`);
+          const usuarios = await res.json();
+          const select = document.getElementById("asig_ingeniero");
+          select.innerHTML =
+            '<option value="">Seleccione Técnico / Ingeniero...</option>';
+
+          const tecnicos = usuarios.filter(
+            (u) => u.rol === "ADMINISTRADOR" || u.rol === "TECNICO",
+          );
+          tecnicos.forEach((ing) => {
+            select.innerHTML += `<option value="${ing.id}">${ing.nombre}</option>`;
+          });
+        } catch (err) {
+          console.error("Error al cargar lista de ingenieros:", err);
+        }
+      }
+
+      // CONFIGURACIÓN MÁSTER
+      async function cargarConfiguracion() {
+        cargarUsuariosSistema();
+        cargarColaboradoresTabla();
+        cargarParametrosTabla();
+      }
+
+      async function cargarParametrosTabla() {
+        const tipo = document.getElementById("param_tipo_select").value;
+        const res = await fetch(`${API_URL}/parametros/${tipo}`);
+        const params = await res.json();
+        const tbody = document.getElementById("tabla-parametros-body");
+        tbody.innerHTML = "";
+        params.forEach((p) => {
+          tbody.innerHTML += `<tr><td>${p.id}</td><td><b>${p.valor}</b></td><td><button class="btn btn-danger" style="padding:2px 6px;" onclick="eliminarParametro(${p.id})">Eliminar</button></td></tr>`;
+        });
+      }
+
+      async function guardarParametro() {
+        const tipo = document.getElementById("param_tipo_select").value;
+        const valor = document.getElementById("param_nuevo_valor").value.trim();
+        if (!valor) return mostrarNotificacion("Ingrese un valor.", "error");
+
+        await fetch(`${API_URL}/parametros/guardar`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            tipo,
+            valor,
+            usuario_registro: usuarioSesion.usuario,
+          }),
+        });
+        document.getElementById("param_nuevo_valor").value = "";
+        mostrarNotificacion("Parámetro guardado.");
+        cargarParametrosTabla();
+      }
+
+      function eliminarParametro(id) {
+        solicitarConfirmacion(
+          "¿Desea eliminar este parámetro del sistema?",
+          async () => {
+            await fetch(`${API_URL}/parametros/${id}`, { method: "DELETE" });
+            mostrarNotificacion("Parámetro eliminado.");
+            cargarParametrosTabla();
+          },
+        );
+      }
+
+      // GESTIÓN EQUIPOS
+      async function mostrarModalEquipo() {
+        modoModal = "CREAR";
+        document.getElementById("modalTitulo").innerText = "Registrar Equipo";
+        document.getElementById("edit_placa").value = "";
+        document.getElementById("edit_placa").disabled = false;
+        document.getElementById("edit_modelo").value = "";
+        document.getElementById("edit_serial").value = "";
+        document.getElementById("edit_hostname").value = "";
+        await cargarSelectsEquipo();
+        document.getElementById("modalEquipo").style.display = "flex";
+      }
+
+      async function prepararEdicion(placa) {
+        try {
+          const res = await fetch(
+            `${API_URL}/equipos/${encodeURIComponent(placa)}`,
+          );
+          const data = await res.json();
+          if (!data.ok)
+            return mostrarNotificacion("No se encontró el equipo.", "error");
+
+          modoModal = "EDITAR";
+          const eq = data.equipo;
+
+          document.getElementById("modalTitulo").innerText =
+            "Editar Equipo: " + placa;
+          document.getElementById("edit_placa").value = eq.placa_inventario;
+          document.getElementById("edit_placa").disabled = true;
+
+          await cargarSelectsEquipo();
+
+          const selectTipo = document.getElementById("edit_tipo");
+          const selectMarca = document.getElementById("edit_marca");
+
+          selectTipo.value = (eq.tipo_equipo || "").trim();
+          selectMarca.value = (eq.marca || "").trim();
+          document.getElementById("edit_modelo").value = eq.modelo || "";
+          document.getElementById("edit_serial").value = eq.serial || "";
+          document.getElementById("edit_hostname").value = eq.hostname || "";
+          document.getElementById("edit_estado").value =
+            eq.estado || "Disponible";
+
+          document.getElementById("modalEquipo").style.display = "flex";
+        } catch (err) {
+          mostrarNotificacion(
+            "Error al preparar la edición del equipo.",
+            "error",
+          );
+        }
+      }
+
+      async function guardarCambiosModal() {
+        const placa = document.getElementById("edit_placa").value.trim();
+        const tipo = document.getElementById("edit_tipo").value;
+        const marca = document.getElementById("edit_marca").value;
+        const modelo = document.getElementById("edit_modelo").value.trim();
+        const serial = document.getElementById("edit_serial").value.trim();
+
+        if (!placa || !tipo || !marca || !modelo || !serial) {
+          return mostrarNotificacion(
+            "Complete los campos obligatorios.",
+            "error",
+          );
+        }
+
+        const payload = {
+          placa_inventario: placa,
+          tipo_equipo: tipo,
+          marca: marca,
+          modelo: modelo,
+          serial: serial,
+          hostname: document.getElementById("edit_hostname").value.trim(),
+          estado: document.getElementById("edit_estado").value,
+          usuario_registro: usuarioSesion ? usuarioSesion.usuario : "SISTEMA",
+        };
+
+        const endpoint =
+          modoModal === "CREAR"
+            ? `${API_URL}/equipos/guardar`
+            : `${API_URL}/equipos/${placa}`;
+        const metodo = modoModal === "CREAR" ? "POST" : "PUT";
+
+        const res = await fetch(endpoint, {
+          method: metodo,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+          cerrarModalGeneral("modalEquipo");
+          mostrarNotificacion("Equipo guardado.");
+          cargarTablaInventario();
+        }
+      }
+
+      function eliminarEquipo(placa) {
+        solicitarConfirmacion(
+          `¿Confirma eliminar el equipo con placa ${placa}?`,
+          async () => {
+            const res = await fetch(`${API_URL}/equipos/${placa}`, {
+              method: "DELETE",
+            });
+            const data = await res.json();
+            if (data.ok) {
+              mostrarNotificacion(data.mensaje);
+              cargarTablaInventario();
+            }
+          },
+        );
+      }
+
+      // GESTIÓN COLABORADORES
+      async function abrirModalColaboradorDirecto() {
+        document.getElementById("colabModalTitulo").innerText =
+          "Registrar Colaborador";
+        document.getElementById("colab_cedula").value = "";
+        document.getElementById("colab_cedula").disabled = false;
+        document.getElementById("colab_nombre").value = "";
+        await cargarSelectsColaborador();
+        document.getElementById("modalColaborador").style.display = "flex";
+      }
+
+      async function editarColaboradorModal(cedula, nombre, gerencia, sede) {
+        try {
+          document.getElementById("colabModalTitulo").innerText =
+            "Editar Colaborador: " + cedula;
+          document.getElementById("colab_cedula").value = cedula;
+          document.getElementById("colab_cedula").disabled = true;
+          document.getElementById("colab_nombre").value = nombre;
+
+          await cargarSelectsColaborador();
+
+          const selectG = document.getElementById("colab_gerencia");
+          const selectS = document.getElementById("colab_sede");
+
+          const valGerencia = (gerencia || "").trim();
+          const valSede = (sede || "").trim();
+
+          selectG.value = valGerencia;
+          selectS.value = valSede;
+
+          if (!selectG.value && valGerencia) {
+            for (let option of selectG.options) {
+              if (
+                option.value.trim().toLowerCase() === valGerencia.toLowerCase()
+              ) {
+                selectG.value = option.value;
+                break;
+              }
+            }
+          }
+
+          if (!selectS.value && valSede) {
+            for (let option of selectS.options) {
+              if (option.value.trim().toLowerCase() === valSede.toLowerCase()) {
+                selectS.value = option.value;
+                break;
+              }
+            }
+          }
+
+          document.getElementById("modalColaborador").style.display = "flex";
+        } catch (err) {
+          mostrarNotificacion(
+            "Error al abrir edición del colaborador.",
+            "error",
+          );
+        }
+      }
+
+      async function guardarColaboradorModal() {
+        const cedula = document.getElementById("colab_cedula").value.trim();
+        const nombre = document.getElementById("colab_nombre").value.trim();
+        const gerencia = document.getElementById("colab_gerencia").value;
+        const sede = document.getElementById("colab_sede").value;
+
+        if (!cedula || !nombre || !gerencia || !sede)
+          return mostrarNotificacion("Complete todos los campos.", "error");
+
+        const res = await fetch(`${API_URL}/colaboradores/guardar`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            cedula,
+            nombre_completo: nombre,
+            gerencia,
+            sede,
+          }),
+        });
+        const data = await res.json();
+        if (data.ok) {
+          cerrarModalGeneral("modalColaborador");
+          mostrarNotificacion("Colaborador guardado exitosamente.");
+          cargarColaboradoresTabla();
+        } else {
+          mostrarNotificacion("Error: " + data.error, "error");
+        }
+      }
+
+      function eliminarColaboradorModal(cedula) {
+        solicitarConfirmacion(
+          `¿Desea eliminar al colaborador con cédula ${cedula}?`,
+          async () => {
+            await fetch(`${API_URL}/colaboradores/${cedula}`, {
+              method: "DELETE",
+            });
+            mostrarNotificacion("Colaborador eliminado.");
+            cargarColaboradoresTabla();
+          },
+        );
+      }
+
+      // BÚSQUEDAS RÁPIDAS (PLACA O SERIAL)
+      async function buscarEquipo() {
+        const placa = document.getElementById("asig_placa").value.trim();
+        if (!placa)
+          return mostrarNotificacion("Ingrese una placa o serial.", "error");
+
+        try {
+          const res = await fetch(
+            `${API_URL}/equipos/${encodeURIComponent(placa)}`,
+          );
+          const data = await res.json();
+
+          if (!data.ok) {
+            return mostrarNotificacion("Equipo no registrado.", "error");
+          }
+
+          const eq = data.equipo;
+          document.getElementById("asig_placa").value = eq.placa_inventario;
+          document.getElementById("asig_tipo").value = eq.tipo_equipo || "";
+          document.getElementById("asig_marca").value = eq.marca || "";
+          document.getElementById("asig_modelo").value = eq.modelo || "";
+          document.getElementById("asig_serial").value = eq.serial || "";
+          document.getElementById("asig_hostname").value = eq.hostname || "";
+
+          mostrarNotificacion("Equipo encontrado.");
+        } catch (err) {
+          console.error("Error al buscar equipo:", err);
+          mostrarNotificacion(
+            "Error al realizar la consulta del equipo.",
+            "error",
+          );
+        }
+      }
+
+      async function buscarColaborador() {
+        const cedula = document.getElementById("asig_cedula").value.trim();
+        if (!cedula) return;
+        const res = await fetch(`${API_URL}/colaboradores/${cedula}`);
+        const data = await res.json();
+        if (!data.ok) {
+          await abrirModalColaboradorDirecto();
+          document.getElementById("colab_cedula").value = cedula;
+          return;
+        }
+        const col = data.colaborador;
+        document.getElementById("asig_nombre").value = col.nombre_completo;
+        document.getElementById("asig_gerencia").value = col.gerencia;
+        document.getElementById("asig_sede").value = col.sede;
+      }
+
+      async function guardarMovimiento(tipoActa) {
+        const placa = document.getElementById("asig_placa").value;
+        const cedula = document.getElementById("asig_cedula").value;
+        const ingenieroId = document.getElementById("asig_ingeniero").value;
+        const servicio = document.getElementById("asig_servicio").value;
+        const hostname = document.getElementById("asig_hostname").value;
+        const obs = document.getElementById("asig_obs").value;
+
+        if (!placa || !cedula || !ingenieroId)
+          return mostrarNotificacion(
+            "Complete Placa, Cédula e Ingeniero.",
+            "error",
+          );
+
+        const firmaCol = obtenerFirmaBase64("canvasFirmaColaborador");
+        const firmaIng = obtenerFirmaBase64("canvasFirmaIngeniero");
+
+        const res = await fetch(`${API_URL}/actas`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            tipo_acta: tipoActa,
+            placa_inventario: placa,
+            cedula_colaborador: cedula,
+            ingeniero_id: ingenieroId,
+            tipo_servicio: servicio,
+            hostname: hostname,
+            observaciones: obs,
+            firma_colaborador: firmaCol,
+            firma_ingeniero: firmaIng,
+            usuario_registro: usuarioSesion ? usuarioSesion.usuario : "SISTEMA",
+          }),
+        });
+
+        const data = await res.json();
+        if (data.ok) {
+          mostrarNotificacion("¡Acta firmada y registrada exitosamente!");
+          limpiarCanvas("canvasFirmaColaborador");
+          limpiarCanvas("canvasFirmaIngeniero");
+          document.getElementById("asig_placa").value = "";
+          document.getElementById("asig_cedula").value = "";
+        } else {
+          mostrarNotificacion("Error: " + data.error, "error");
+        }
+      }
+
+      // TABLAS
+      async function cargarTablaInventario() {
+        const res = await fetch(`${API_URL}/equipos`);
+        const equipos = await res.json();
+        const tbody = document.getElementById("tabla-inventario-body");
+        tbody.innerHTML = "";
+
+        equipos.forEach((eq) => {
+          tbody.innerHTML += `
+            <tr>
+              <td><b>${eq.placa_inventario}</b></td>
+              <td>${eq.tipo_equipo}</td>
+              <td>${eq.marca} ${eq.modelo}</td>
+              <td>${eq.serial}</td>
+              <td>${eq.hostname || "N/A"}</td>
+              <td><b>${eq.usuario_asignado || "N/A"}</b></td>
+              <td><span class="badge bg-disponible">${eq.estado}</span></td>
+              <td>
+                <button class="btn btn-secondary" style="padding:2px 6px;" onclick="verHojaVida('${eq.placa_inventario}')">📜 Trazabilidad</button>
+                <button class="btn btn-primary" style="padding:2px 6px;" onclick="prepararEdicion('${eq.placa_inventario}')">Editar</button>
+                <button class="btn btn-danger" style="padding:2px 6px;" onclick="eliminarEquipo('${eq.placa_inventario}')">Eliminar</button>
+              </td>
+            </tr>
+          `;
+        });
+      }
+
+      async function verHojaVida(placa) {
+        const res = await fetch(`${API_URL}/equipos/historial/${placa}`);
+        const historial = await res.json();
+        document.getElementById("hv_titulo").innerText =
+          "Hoja de Vida: Equipo " + placa;
+        const tbody = document.getElementById("tabla-hojavida-body");
+        tbody.innerHTML = "";
+        historial.forEach((h) => {
+          tbody.innerHTML += `
+            <tr>
+              <td>${new Date(h.fecha_movimiento).toLocaleString()}</td>
+              <td><span class="badge bg-asignado">${h.tipo_operacion}</span></td>
+              <td>${h.nombre_colaborador || "N/A"}</td>
+              <td>${h.usuario_registro}</td>
+              <td>${h.observaciones || "Sin observaciones"}</td>
+            </tr>
+          `;
+        });
+        document.getElementById("modalHojaVida").style.display = "flex";
+      }
+
+      async function cargarTablaActas() {
+        const res = await fetch(`${API_URL}/actas/consulta`);
+        const actas = await res.json();
+        const tbody = document.getElementById("tabla-actas-body");
+        tbody.innerHTML = "";
+
+        actas.forEach((a) => {
+          const fecha = new Date(a.fecha_creacion).toLocaleDateString("es-CO");
+          const btnPdf = a.documento_pdf
+            ? `<a href="${a.documento_pdf}" download="Acta_${a.id_acta}.pdf" class="btn btn-success" style="padding:2px 6px;">📄 Descargar PDF</a>`
+            : `<button class="btn btn-secondary" style="padding:2px 6px;" onclick="abrirModalSubirPdf(${a.id_acta})">📎 Adjuntar PDF</button>`;
+
+          tbody.innerHTML += `
+            <tr>
+              <td><b>ACT-${a.id_acta}</b></td>
+              <td><span class="badge bg-asignado">${a.tipo_acta}</span></td>
+              <td>${fecha}</td>
+              <td>${a.tipo_equipo} (${a.placa_inventario})</td>
+              <td>${a.nombre_colaborador || "N/A"}</td>
+              <td>${a.nombre_ingeniero || "N/A"}</td>
+              <td>${btnPdf}</td>
+              <td><button class="btn btn-primary" style="padding:2px 6px;" onclick="reimprimirActa(${a.id_acta})">👁️ Ver / Imprimir</button></td>
+            </tr>
+          `;
+        });
+      }
+
+      function abrirModalSubirPdf(idActa) {
+        document.getElementById("pdf_acta_id").value = idActa;
+        document.getElementById("modalSubirPdf").style.display = "flex";
+      }
+
+      async function guardarPdfAdjunto() {
+        const idActa = document.getElementById("pdf_acta_id").value;
+        const fileInput = document.getElementById("pdf_file_input");
+        if (!fileInput.files.length)
+          return mostrarNotificacion("Seleccione un archivo PDF.", "error");
+
+        const reader = new FileReader();
+        reader.onload = async function (e) {
+          const pdfBase64 = e.target.result;
+          const res = await fetch(`${API_URL}/actas/adjuntar-pdf`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id_acta: idActa,
+              documento_pdf: pdfBase64,
+              usuario_registro: usuarioSesion.usuario,
+            }),
+          });
+          const data = await res.json();
+          if (data.ok) {
+            cerrarModalGeneral("modalSubirPdf");
+            mostrarNotificacion("PDF Adjuntado.");
+            cargarTablaActas();
+          }
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      }
+
+      async function reimprimirActa(idActa) {
+        const res = await fetch(`${API_URL}/actas/${idActa}`);
+        const data = await res.json();
+        if (!data.ok) return;
+
+        const a = data.acta;
+        const imgCol = a.firma_colaborador
+          ? `<img src="${a.firma_colaborador}" style="height:50px; display:block; margin: 0 auto;"/>`
+          : "";
+        const imgIng = a.firma_ingeniero
+          ? `<img src="${a.firma_ingeniero}" style="height:50px; display:block; margin: 0 auto;"/>`
+          : "";
+
+        const htmlActa = `
+          <div style="text-align: center; border-bottom: 2px solid #000; padding-bottom: 10px; margin-bottom: 15px;">
+            <h2 style="margin: 0;">ACTA DE ${a.tipo_acta} DE EQUIPO IT</h2>
+            <small>N° Consecutivo: <b>ACT-${a.id_acta}</b> | Fecha: ${new Date(a.fecha_creacion).toLocaleString("es-CO")}</small>
+          </div>
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px; font-size: 12px;">
+            <tr style="background: #f0f0f0;"><th colspan="2" style="border: 1px solid #000; padding: 4px;">1. DATOS DEL COLABORADOR</th></tr>
+            <tr><td style="border: 1px solid #000; padding: 4px; width: 30%;"><b>Nombre Completo:</b></td><td style="border: 1px solid #000; padding: 4px;">${a.nombre_colaborador || "N/A"}</td></tr>
+            <tr><td style="border: 1px solid #000; padding: 4px;"><b>Cédula:</b></td><td style="border: 1px solid #000; padding: 4px;">${a.cedula_colaborador || "N/A"}</td></tr>
+            <tr><td style="border: 1px solid #000; padding: 4px;"><b>Área / Gerencia:</b></td><td style="border: 1px solid #000; padding: 4px;">${a.gerencia || "N/A"} - ${a.sede || ""}</td></tr>
+
+            <tr style="background: #f0f0f0;"><th colspan="2" style="border: 1px solid #000; padding: 4px;">2. DATOS DEL EQUIPO</th></tr>
+            <tr><td style="border: 1px solid #000; padding: 4px;"><b>Tipo / Marca / Modelo:</b></td><td style="border: 1px solid #000; padding: 4px;">${a.tipo_equipo} ${a.marca} ${a.modelo}</td></tr>
+            <tr><td style="border: 1px solid #000; padding: 4px;"><b>Placa Inventario:</b></td><td style="border: 1px solid #000; padding: 4px;">${a.placa_inventario}</td></tr>
+            <tr><td style="border: 1px solid #000; padding: 4px;"><b>Número Serial:</b></td><td style="border: 1px solid #000; padding: 4px;">${a.serial}</td></tr>
+
+            <tr style="background: #f0f0f0;"><th colspan="2" style="border: 1px solid #000; padding: 4px;">3. DETALLES DEL SERVICIO</th></tr>
+            <tr><td style="border: 1px solid #000; padding: 4px;"><b>Ingeniero Responsable:</b></td><td style="border: 1px solid #000; padding: 4px;">${a.nombre_ingeniero || "N/A"}</td></tr>
+            <tr><td style="border: 1px solid #000; padding: 4px;"><b>Observaciones:</b></td><td style="border: 1px solid #000; padding: 4px;">${a.observaciones || "Sin observaciones."}</td></tr>
+          </table>
+          <div style="margin-top: 30px; display: flex; justify-content: space-between; text-align: center;">
+            <div style="width: 45%; border-top: 1px solid #000; padding-top: 5px;">${imgCol}<b>Firma Colaborador</b><br><small>${a.nombre_colaborador || ""}</small></div>
+            <div style="width: 45%; border-top: 1px solid #000; padding-top: 5px;">${imgIng}<b>Firma Ingeniero IT</b><br><small>${a.nombre_ingeniero || ""}</small></div>
+          </div>
+        `;
+
+        document.getElementById("contenidoActaImpresion").innerHTML = htmlActa;
+        document.getElementById("modalVisorActa").style.display = "flex";
+      }
+
+      async function cargarUsuariosSistema() {
+        const res = await fetch(`${API_URL}/usuarios-sistema`);
+        const usuarios = await res.json();
+        const tbody = document.getElementById("tabla-usuarios-sistema-body");
+        tbody.innerHTML = "";
+        usuarios.forEach((u) => {
+          tbody.innerHTML += `
+            <tr>
+              <td>${u.id}</td><td><b>${u.nombre}</b></td><td>${u.usuario}</td><td><span class="badge bg-asignado">${u.rol}</span></td>
+              <td>
+                <button class="btn btn-primary" style="padding:2px 6px;" onclick="editarUsuarioSistema(${u.id}, '${u.nombre}', '${u.usuario}', '${u.rol}')">Editar</button>
+                <button class="btn btn-danger" style="padding:2px 6px;" onclick="eliminarUsuarioSistema(${u.id})">Eliminar</button>
+              </td>
+            </tr>
+          `;
+        });
+      }
+
+      function abrirModalUsuario() {
+        document.getElementById("usr_id").value = "";
+        document.getElementById("usr_nombre").value = "";
+        document.getElementById("usr_usuario").value = "";
+        document.getElementById("usr_password").value = "";
+        document.getElementById("modalUsuarioSistema").style.display = "flex";
+      }
+
+      function editarUsuarioSistema(id, nombre, usuario, rol) {
+        document.getElementById("usr_id").value = id;
+        document.getElementById("usr_nombre").value = nombre;
+        document.getElementById("usr_usuario").value = usuario;
+        document.getElementById("usr_password").value = "";
+        document.getElementById("usr_rol").value = rol;
+        document.getElementById("modalUsuarioSistema").style.display = "flex";
+      }
+
+      async function guardarUsuarioSistema() {
+        const id = document.getElementById("usr_id").value;
+        const nombre = document.getElementById("usr_nombre").value.trim();
+        const usuario = document.getElementById("usr_usuario").value.trim();
+        const password = document.getElementById("usr_password").value.trim();
+        const rol = document.getElementById("usr_rol").value;
+
+        if (!nombre || !usuario)
+          return mostrarNotificacion("Datos requeridos.", "error");
+
+        const res = await fetch(`${API_URL}/usuarios-sistema/guardar`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id, nombre, usuario, password, rol }),
+        });
+        const data = await res.json();
+        if (data.ok) {
+          cerrarModalGeneral("modalUsuarioSistema");
+          mostrarNotificacion("Usuario guardado.");
+          cargarUsuariosSistema();
+          cargarIngenieros();
+        }
+      }
+
+      function eliminarUsuarioSistema(id) {
+        solicitarConfirmacion(
+          "¿Está seguro de que desea eliminar este usuario del sistema?",
+          async () => {
+            const res = await fetch(`${API_URL}/usuarios-sistema/${id}`, {
+              method: "DELETE",
+            });
+            const data = await res.json();
+            if (data.ok) {
+              mostrarNotificacion("Usuario eliminado.");
+              cargarUsuariosSistema();
+              cargarIngenieros();
+            } else {
+              mostrarNotificacion("Error: " + data.error, "error");
+            }
+          },
+        );
+      }
+
+      async function cargarColaboradoresTabla() {
+        const res = await fetch(`${API_URL}/colaboradores`);
+        const colaboradores = await res.json();
+        const tbody = document.getElementById("tabla-colaboradores-body");
+        tbody.innerHTML = "";
+
+        colaboradores.forEach((c) => {
+          const nombreEscapado = (c.nombre_completo || "").replace(/'/g, "\\'");
+          const gerenciaEscapada = (c.gerencia || "").replace(/'/g, "\\'");
+          const sedeEscapada = (c.sede || "").replace(/'/g, "\\'");
+
+          tbody.innerHTML += `
+            <tr>
+              <td><b>${c.cedula}</b></td>
+              <td>${c.nombre_completo}</td>
+              <td>${c.gerencia}</td>
+              <td>${c.sede}</td>
+              <td>
+                <button class="btn btn-primary" style="padding:2px 6px;" 
+                  onclick="editarColaboradorModal('${c.cedula}', '${nombreEscapado}', '${gerenciaEscapada}', '${sedeEscapada}')">
+                  Editar
+                </button>
+                <button class="btn btn-danger" style="padding:2px 6px;" 
+                  onclick="eliminarColaboradorModal('${c.cedula}')">
+                  Eliminar
+                </button>
+              </td>
+            </tr>
+          `;
+        });
+      }
+
+      function filtrarTabla() {
+        const filtro = document
+          .getElementById("buscadorInventario")
+          .value.toLowerCase();
+        document
+          .querySelectorAll("#tabla-inventario-body tr")
+          .forEach((row) => {
+            row.style.display = row.innerText.toLowerCase().includes(filtro)
+              ? ""
+              : "none";
+          });
+      }
+
+      function filtrarTablaActas() {
+        const filtro = document
+          .getElementById("buscadorActas")
+          .value.toLowerCase();
+        document.querySelectorAll("#tabla-actas-body tr").forEach((row) => {
+          row.style.display = row.innerText.toLowerCase().includes(filtro)
+            ? ""
+            : "none";
+        });
+      }
+
+      function mostrarNotificacion(mensaje, tipo = "success") {
+        const container = document.getElementById("toastContainer");
+        const toast = document.createElement("div");
+        toast.className = `toast ${tipo}`;
+        toast.innerHTML = `<span>${tipo === "success" ? "✅" : "ℹ️"}</span> ${mensaje}`;
+        container.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      }
+    </script>
+  </body>
+</html>
