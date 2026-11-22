@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>OsCars — Latonería y Pintura Automotriz</title>
+    <title>OSCARS Latonería y Pintura — Calidad que se nota</title>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
@@ -11,34 +11,68 @@
     />
   </head>
   <body>
+    <!-- PRELOADER DE ENTRADA -->
+    <div class="preloader" id="preloader" aria-hidden="true">
+      <div class="preloader-box">
+        <div class="preloader-vehiculo">
+          <img
+            src="img/oscars.jpeg"
+            alt="OSCARS Latonería y Pintura"
+            class="preloader-logo"
+          />
+          <i class="fa-solid fa-car-side preloader-car-icon"></i>
+        </div>
+        <p class="preloader-brand">OSCARS <span>LATONERÍA Y PINTURA</span></p>
+        <p class="preloader-slogan">«Calidad que se nota»</p>
+        <div class="preloader-track">
+          <div class="preloader-bar" id="preloaderBar"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- HEADER / NAVEGACIÓN -->
     <header class="navbar">
-      <div class="logo"><span>Os</span>Cars</div>
+      <a href="#hero" class="logo" aria-label="OSCARS Latonería y Pintura">
+        <img
+          src="img/oscars.jpeg"
+          alt="OSCARS Latonería y Pintura - Calidad que se nota"
+          class="logo-img"
+        />
+        <span class="logo-text">
+          <strong>OSCARS</strong>
+          <small>Latonería y Pintura</small>
+        </span>
+      </a>
       <nav class="nav-links" id="navLinks">
-        <a href="#hero">Inicio</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#vehiculos">Especialidades</a>
-        <a href="#antes-despues">Antes/Después</a>
-        <a href="#galeria">Galería</a>
-        <a href="#contacto">Ubicación</a>
+        <a href="#hero" class="nav-link active">Inicio</a>
+        <a href="#servicios" class="nav-link">Servicios</a>
+        <a href="#vehiculos" class="nav-link">Especialidades</a>
+        <a href="#antes-despues" class="nav-link">Antes/Después</a>
+        <a href="#galeria" class="nav-link">Galería</a>
+        <a href="#garantia" class="nav-link">Garantía</a>
+        <a href="#contacto" class="nav-link">Ubicación</a>
       </nav>
       <a
-        href="https://wa.me/573001234567?text=Hola%20OsCars,%20quisiera%20cotizar%20un%20trabajo%20de%20latonería%20o%20pintura"
+        href="#"
+        id="headerWappBtn"
         target="_blank"
+        rel="noopener noreferrer"
         class="btn-whatsapp-header"
       >
         <i class="fa-brands fa-whatsapp"></i> Cotizar
       </a>
-      <div class="menu-toggle" id="menuToggle">
+      <div class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
         <i class="fa-solid fa-bars"></i>
       </div>
+      <!-- BARRA DE PROGRESO DE LECTURA -->
+      <div class="scroll-progress" id="scrollProgress"></div>
     </header>
 
     <!-- HERO SECTION -->
     <section id="hero" class="hero">
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <span class="badge">Tu Taller de Confianza</span>
+        <span class="badge">Calidad que se nota • Latonería y Pintura</span>
         <h1>Dejamos tu Vehículo Como Nuevo y A Un Precio Justo</h1>
         <p>
           Expertos en latonería y pintura para Taxis, Autos Particulares (Aveo,
@@ -47,13 +81,29 @@
         </p>
         <div class="hero-buttons">
           <a
-            href="https://wa.me/573001234567?text=Hola%20OsCars,%20me%20gustaría%20agendar%20una%20revisión%20de%20mi%20vehículo"
+            href="#"
+            id="heroWappBtn"
             target="_blank"
+            rel="noopener noreferrer"
             class="btn-primary"
           >
             <i class="fa-brands fa-whatsapp"></i> Cotizar por WhatsApp
           </a>
           <a href="#servicios" class="btn-secondary">Ver Servicios</a>
+        </div>
+        <div class="hero-highlights">
+          <div class="highlight-item">
+            <i class="fa-solid fa-spray-can-sparkles"></i>
+            <span>Igualación de color y acabado</span>
+          </div>
+          <div class="highlight-item">
+            <i class="fa-solid fa-shield-halved"></i>
+            <span>Garantía por escrito en el taller</span>
+          </div>
+          <div class="highlight-item">
+            <i class="fa-solid fa-bolt"></i>
+            <span>Cotización rápida por WhatsApp</span>
+          </div>
         </div>
       </div>
     </section>
@@ -62,7 +112,8 @@
     <section id="vehiculos" class="vehiculos">
       <h2 class="section-title">Vehículos que Atendemos</h2>
       <p class="section-subtitle">
-        Alistamiento y pintura para los vehículos que mueven al país
+        Alistamiento y pintura para los vehículos que mueven al país •
+        <em>Calidad que se nota</em>
       </p>
 
       <div class="cards-grid">
@@ -73,6 +124,9 @@
             Trabajo rápido y garantizado para que tu herramienta de trabajo no
             deje de producir. Amarillos impecables con pintura resistente.
           </p>
+          <a href="#" class="card-wapp-link" data-vehiculo="Taxis y Flotas">
+            Cotizar para Taxi <i class="fa-solid fa-arrow-right"></i>
+          </a>
         </div>
 
         <div class="card-vehiculo reveal">
@@ -82,6 +136,9 @@
             Reparación de golpes, rayones y desabolladura. Igualación exacta del
             color original de tu carro para que quede impecable.
           </p>
+          <a href="#" class="card-wapp-link" data-vehiculo="Auto Particular">
+            Cotizar Auto Particular <i class="fa-solid fa-arrow-right"></i>
+          </a>
         </div>
 
         <div class="card-vehiculo reveal">
@@ -91,6 +148,13 @@
             Latonería pesada y pintura general para camiones de carga, cabinas y
             furgones. Dejamos tu camión listo para la carretera.
           </p>
+          <a
+            href="#"
+            class="card-wapp-link"
+            data-vehiculo="Camión (Turbo / NPR)"
+          >
+            Cotizar Camión <i class="fa-solid fa-arrow-right"></i>
+          </a>
         </div>
       </div>
     </section>
@@ -132,26 +196,24 @@
     <section id="antes-despues" class="antes-despues reveal">
       <h2 class="section-title">Resultados Reales: Antes y Después</h2>
       <p class="section-subtitle">
-        Arrastra la barra en el centro para ver la transformación de los
-        vehículos en OsCars
+        Arrastra la barra o haz clic sobre la imagen para comparar el antes y el
+        después en OSCARS Latonería y Pintura
       </p>
 
       <div class="ba-slider-container">
         <div class="ba-slider" id="baSlider">
-          <div
-            class="img-before"
-            style="
-              background-image: url(&quot;https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=1200&q=80&quot;);
-            "
-          >
+          <div class="img-before">
+            <img
+              src="img/pintura.jpg"
+              alt="Vehículo antes de latonería y pintura"
+            />
             <span class="ba-label label-before">ANTES (Daño)</span>
           </div>
-          <div
-            class="img-after"
-            style="
-              background-image: url(&quot;https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80&quot;);
-            "
-          >
+          <div class="img-after">
+            <img
+              src="img/pintura2.jpg"
+              alt="Vehículo después de latonería y pintura"
+            />
             <span class="ba-label label-after">DESPUÉS (Restaurado)</span>
           </div>
           <input
@@ -161,6 +223,7 @@
             value="50"
             class="slider-handle"
             id="sliderHandle"
+            aria-label="Comparar antes y después"
           />
           <div class="slider-line" id="sliderLine"></div>
         </div>
@@ -168,11 +231,11 @@
     </section>
 
     <!-- SECCIÓN GALERÍA DE TRABAJOS -->
-   <!-- SECCIÓN GALERÍA DE TRABAJOS -->
     <section id="galeria" class="galeria">
       <h2 class="section-title">Galería de Trabajos</h2>
       <p class="section-subtitle">
-        Haz clic en cualquier imagen para verla en tamaño completo
+        Haz clic en cualquier imagen para verla en tamaño completo y cotizar un
+        trabajo similar
       </p>
 
       <div class="galeria-filtros">
@@ -184,7 +247,6 @@
         <button class="filter-btn" data-filter="camiones">Camiones</button>
       </div>
 
-      <!-- Malla de Fotos (con rutas corregidas) -->
       <div class="galeria-grid">
         <div
           class="galeria-item particulares reveal"
@@ -263,11 +325,11 @@
 
         <div
           class="galeria-item camiones reveal"
-          data-full="img/kiataxi.jpg"
+          data-full="img/furgon.jpg"
           data-title="Furgón Comercial"
           data-desc="Pintura anticorrosiva y alistamiento general de carrocería."
         >
-          <img src="img/kiataxi.jpg" alt="Furgón" />
+          <img src="img/furgon.jpg" alt="Furgón Comercial" />
           <div class="galeria-overlay">
             <span>
               Furgón — Pintura Comercial
@@ -278,15 +340,79 @@
       </div>
     </section>
 
+    <!-- GARANTÍA Y PROCESO DE COTIZACIÓN -->
+    <section id="garantia" class="garantia-section">
+      <h2 class="section-title">Garantía y Proceso de Trabajo</h2>
+      <p class="section-subtitle">
+        Transparencia desde la cotización hasta la entrega de tu vehículo
+      </p>
+
+      <div class="proceso-grid">
+        <div class="proceso-step reveal">
+          <span class="step-num">01</span>
+          <i class="fa-solid fa-clipboard-check"></i>
+          <h3>Revisión y Diagnóstico</h3>
+          <p>
+            Evaluamos golpes, líneas de lámina y estado de pintura para definir
+            el alcance exacto.
+          </p>
+        </div>
+
+        <div class="proceso-step reveal">
+          <span class="step-num">02</span>
+          <i class="fa-solid fa-file-invoice-dollar"></i>
+          <h3>Cotización Clara</h3>
+          <p>
+            Te presentamos un presupuesto detallado y sin sorpresas antes de
+            iniciar cualquier intervención.
+          </p>
+        </div>
+
+        <div class="proceso-step reveal">
+          <span class="step-num">03</span>
+          <i class="fa-solid fa-shield-halved"></i>
+          <h3>Acabado y Garantía</h3>
+          <p>
+            Trabajamos con materiales de calidad y respaldo en pintura y
+            acabados bajo términos del taller.
+          </p>
+        </div>
+
+        <div class="proceso-step reveal">
+          <span class="step-num">04</span>
+          <i class="fa-solid fa-car-side"></i>
+          <h3>Entrega Verificada</h3>
+          <p>
+            Revisamos contigo cada detalle en la entrega para asegurar que el
+            resultado cumpla lo acordado.
+          </p>
+        </div>
+      </div>
+    </section>
+
     <!-- VENTANA FLOTANTE (MODAL / LIGHTBOX) -->
-    <div class="modal-lightbox" id="modalLightbox">
-      <span class="modal-close" id="modalClose">&times;</span>
+    <div
+      class="modal-lightbox"
+      id="modalLightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+    >
+      <span class="modal-close" id="modalClose" aria-label="Cerrar ventana"
+        >×</span
+      >
       <div class="modal-content">
         <img src="" id="modalImg" alt="Trabajo Realizado" />
         <div class="modal-info">
           <h3 id="modalTitle">Título del Trabajo</h3>
           <p id="modalDesc">Descripción detallada del trabajo realizado.</p>
-          <a href="#" id="modalWappBtn" target="_blank" class="btn-primary">
+          <a
+            href="#"
+            id="modalWappBtn"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-primary"
+          >
             <i class="fa-brands fa-whatsapp"></i> Cotizar un trabajo similar
           </a>
         </div>
@@ -306,8 +432,10 @@
             <i class="fa-solid fa-location-dot"></i>
             <div>
               <h4>Dirección</h4>
-              <p>Calle 13 # 38 - 45, Zona Industrial / 7 de Agosto</p>
-              <p><small>(Bogotá / Colombia)</small></p>
+              <p id="tallerDireccion">
+                Calle 13 # 38 - 45, Zona Industrial / 7 de Agosto
+              </p>
+              <p id="tallerCiudad"><small>(Bogotá / Colombia)</small></p>
             </div>
           </div>
 
@@ -315,8 +443,8 @@
             <i class="fa-solid fa-phone"></i>
             <div>
               <h4>Teléfonos / WhatsApp</h4>
-              <p>+57 300 123 4567</p>
-              <p>+57 311 987 6543</p>
+              <p id="tallerTelefonoPrincipal">+57 300 123 4567</p>
+              <p id="tallerTelefonoSecundario">+57 311 987 6543</p>
             </div>
           </div>
 
@@ -324,8 +452,8 @@
             <i class="fa-solid fa-clock"></i>
             <div>
               <h4>Horarios de Atención</h4>
-              <p>Lunes a Viernes: 7:30 AM - 5:30 PM</p>
-              <p>Sábados: 7:30 AM - 2:00 PM</p>
+              <p id="tallerHorarioSemana">Lunes a Viernes: 7:30 AM - 5:30 PM</p>
+              <p id="tallerHorarioSabado">Sábados: 7:30 AM - 2:00 PM</p>
             </div>
           </div>
         </div>
@@ -348,10 +476,15 @@
     <footer class="footer">
       <div class="footer-content">
         <div class="footer-brand">
-          <h2><span>Os</span>Cars</h2>
+          <img
+            src="img/oscars.jpeg"
+            alt="OSCARS Latonería y Pintura"
+            class="footer-logo"
+          />
+          <p class="footer-slogan">«Calidad que se nota»</p>
           <p>
-            Taller de Latonería y Pintura Automotriz. Honestidad, cumplimiento y
-            acabados garantizados.
+            <strong>OSCARS Latonería y Pintura.</strong> Honestidad,
+            cumplimiento y acabados garantizados.
           </p>
         </div>
 
@@ -363,6 +496,7 @@
             <li><a href="#vehiculos">Especialidades</a></li>
             <li><a href="#antes-despues">Antes/Después</a></li>
             <li><a href="#galeria">Galería</a></li>
+            <li><a href="#garantia">Garantía</a></li>
           </ul>
         </div>
 
@@ -373,8 +507,10 @@
             de inmediato.
           </p>
           <a
-            href="https://wa.me/573001234567?text=Hola%20OsCars,%20quisiera%20cotizar%20un%20trabajo"
+            href="#"
+            id="footerWappBtn"
             target="_blank"
+            rel="noopener noreferrer"
             class="btn-whatsapp-footer"
           >
             <i class="fa-brands fa-whatsapp"></i> Escribir a WhatsApp
@@ -383,14 +519,19 @@
       </div>
 
       <div class="footer-bottom">
-        <p>&copy; 2026 OsCars Taller. Todos los derechos reservados.</p>
+        <p>
+          © 2026 OSCARS Latonería y Pintura — «Calidad que se nota». Todos los
+          derechos reservados.
+        </p>
       </div>
     </footer>
 
     <!-- BOTÓN FLOTANTE WHATSAPP -->
     <a
-      href="https://wa.me/573001234567"
+      href="#"
+      id="floatWappBtn"
       target="_blank"
+      rel="noopener noreferrer"
       class="whatsapp-float"
       title="Hablar por WhatsApp"
     >
